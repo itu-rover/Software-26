@@ -1,0 +1,6 @@
+<launch>
+
+  <!-- Moteus control node launch -->
+  <node pkg="arm23_control"  type="rk23_serial.py" name="Moteus_rk_node" output="screen"/>
+
+</launch>

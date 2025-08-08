@@ -1,0 +1,33 @@
+https://ros-developer.com/2017/04/23/camera-calibration-with-ros/ 
+Sitesine git
+
+sudo apt-get install ros-noetic-usb-cam uvcdynctrl
+Gerekli olan paketleri indir.
+
+Bir sonraki aşamada autofocusu kapamamız isteniyor fakat kulladımız logitech c922 cihazı bu kodlarla kontrol edilemiyor
+sudo apt-get install v4l-utils
+O yüzden paketini indir
+
+v4l2-ctl -d /dev/video2 -l
+komutu ile kamera kontollerine bakılır 
+
+v4l2-ctl -d /dev/video2 -c focus_absolute=0
+Kontrol biçimi öğrenilir ve ayarı 0 olarak değiştirilir.
+
+rosrun usb_cam usb_cam_node 
+Çalıştırılır,bu kod sizin pcnizdeki otomatik usb_cam0 için çalışıcaktır.
+
+rosrun usb_cam usb_cam_node _video_device:=/dev/video2
+rosparam set /usb_cam/video_device /dev/video2
+Bu 2 koddan birisi bu kodu video2 için değistirir
+
+rosrun camera_calibration cameracalibrator.py --size 10x8 --square 0.02517 image:=/usb_cam/image_raw camera:=/usb_cam2 --no-service-check
+Parametrelerin değiştirilmesi gereken kısımları değiştirilir. Ve çalıştırılır. (usb_cam2 gibi)(Bir içteki karelerin köşe sayısı size 9x6 gibi{en dış katman sayılmaz})
+
+Farklı açılardan gerektiği kadar okuma işlemi yapıldığında calibrate tuşuna basılır ve kalibre edilir.Ardında save ile kayıt edilir. Muhtemel kayıt ve fotolar calibrationdata kaydedilmiştir.
+
+
+aruco tag algılanırken terminalde cam node böyle çalıştırılır: rosrun usb_cam usb_cam_node _video_device:=/dev/video2 _camera_info_url:=file:///home/yavuz/.ros/camera_info/logitech_c920.yaml
+kamera böyle de çalıştırılır: rosrun panel_bhv start_usb_cam.py
+
+roslaunch aruco_detect aruco_detect.launch

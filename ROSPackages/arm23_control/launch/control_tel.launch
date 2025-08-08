@@ -1,0 +1,9 @@
+<launch>
+
+<node pkg="arm23_control" type="rk23_serial.py" name="rk23_serial" output="screen"/>
+
+<node pkg="arm23_teleop" type="new_teleop.py" name="rk_teleop" output="screen"/>
+
+
+</launch>
+

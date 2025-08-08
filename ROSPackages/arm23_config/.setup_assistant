@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: naim23_urdf
+    relative_path: urdf/naim23_urdf.urdf
+    xacro_args: ""
+  SRDF:
+    relative_path: config/naim23_urdf.srdf
+  CONFIG:
+    author_name: naim
+    author_email: naim@iturover.team
+    generated_timestamp: 1685219072
