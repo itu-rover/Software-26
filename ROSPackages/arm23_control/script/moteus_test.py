@@ -1,0 +1,225 @@
+#!/usr/bin/python3
+"""
+    Author: Yunus Emre Akar
+    Last Update: 09/05/2023
+"""
+
+import rospy
+from std_msgs.msg import Float32MultiArray, String
+from std_srvs.srv import SetBool, SetBoolResponse, Trigger, TriggerResponse
+import math
+import moteus
+import asyncio
+
+class NaimDrive():
+    def __init__(self):
+        rospy.init_node("Moteus_rk_node")
+        self.pub = rospy.Publisher("joints_feedback", Float32MultiArray, queue_size=10)
+        rospy.Subscriber("joint_commands", String, self.interface_callback)
+        rospy.Subscriber("velocity_commands", Float32MultiArray, self.velocity_callback)
+        
+        self.feedback_pos = Float32MultiArray()
+        self.joint_vels = 0.4
+        self.joint_accels = 0.8
+        self.pos_command=[math.nan]*6
+        self.velocity_command = [0,0,0,0,0,0]
+        self.acc_limit = 1
+        self.allow_write_service = rospy.Service("hardware_interface/allow_write", SetBool, self.allow_write_handler)
+        self.reset_position_service = rospy.Service("hardware_interface/reset_pos", Trigger, self.reset_handler)
+        self.reset_timeout = rospy.Service("hardware_interface/reset_timeout", Trigger, self.timeout_handler)
+        self.velocity_service = rospy.Service("hardware_interface/velocity_mode", SetBool, self.allow_velocity_mode)
+        self.ALLOW_WRITE = False
+        self.VELOCITY_MODE = False
+        self.reset_timeout = False
+        self.zero_pos = [0,0,0,0,0,0]
+        self.motor_pos = [0,0,0,0,0,0]
+        self.rate = rospy.Rate(50)
+
+    def interface_callback(self, msg):
+        self.pos_command = msg.data
+
+    def velocity_callback(self, msg):
+        self.velocity_command = msg.data
+
+    def allow_velocity_mode(self, req):
+        self.VELOCITY_MODE = req.data
+        return SetBoolResponse(success=True, message=f"Velocity command {req.data}")
+
+    def allow_write_handler(self, req):
+        self.ALLOW_WRITE = req.data
+        return SetBoolResponse(success=True, message=f"Allow write command {req.data}")
+
+    def reset_handler(self, req):
+        self.zero_pos = self.motor_pos
+        return TriggerResponse(success=True, message="reset")
+    
+    def timeout_handler(self, req):
+        self.reset_timeout = True
+        return TriggerResponse(success=True, message="reset")
+    
+    async def flush(self):
+        try:
+            await asyncio.wait_for(self.fdcanusb1.read(), 0.05)
+            #await asyncio.wait_for(self.fdcanusb2.read(), 0.05)
+        except asyncio.TimeoutError:
+            rospy.logerr("Flush Timeout Error")
+
+    async def main(self):
+        rospy.loginfo("Node started")
+
+        self.fdcanusb1 = moteus.Fdcanusb(path="/dev/ttyACM0", debug_log=None, disable_brs=True)
+        self.fdcanusb2 = moteus.Fdcanusb(path="/dev/ttyACM1", debug_log=None, disable_brs=True)
+
+        self.c1 = moteus.Controller(id = 1, transport=self.fdcanusb1)
+        self.c2 = moteus.Controller(id = 2, transport=self.fdcanusb1)
+        self.c3 = moteus.Controller(id = 3, transport=self.fdcanusb1)
+        self.c4 = moteus.Controller(id = 4, transport=self.fdcanusb2)
+        self.c5 = moteus.Controller(id = 5, transport=self.fdcanusb2)
+        self.c6 = moteus.Controller(id = 6, transport=self.fdcanusb2)
+        
+        await self.c1.set_stop()
+        await self.c2.set_stop()
+        await self.c3.set_stop()
+        await self.c4.set_stop()
+        await self.c5.set_stop()
+        await self.c6.set_stop()
+
+        rospy.loginfo("moteus started")
+        while not rospy.is_shutdown():
+            try:
+                if self.reset_timeout:
+                    await self.c1.set_stop()
+                    await self.c2.set_stop()
+                    await self.c3.set_stop()
+                    await self.c4.set_stop()
+                    await self.c5.set_stop()
+                    await self.c6.set_stop()
+                    self.reset_timeout = False
+
+                if self.VELOCITY_MODE:
+                    rospy.loginfo_throttle(0.3,"VELOCITY")
+                    command1 = await asyncio.wait_for(self.c1.set_position(position=math.nan, velocity=self.velocity_command[0], accel_limit=self.acc_limit, maximum_torque = 4, query=True),0.05)
+                    command2 = await asyncio.wait_for(self.c2.set_position(position=math.nan, velocity=self.velocity_command[1], accel_limit=self.acc_limit, maximum_torque = 3, query=True),0.05)
+                    command3 = await asyncio.wait_for(self.c3.set_position(position=math.nan, velocity=self.velocity_command[2], accel_limit=self.acc_limit, maximum_torque = 3, query=True),0.05)
+                    command4 = await asyncio.wait_for(self.c4.set_position(position=math.nan, velocity=self.velocity_command[3], accel_limit=self.acc_limit, maximum_torque = 3, query=True),0.05)
+                    command5 = await asyncio.wait_for(self.c5.set_position(position=math.nan, velocity=self.velocity_command[4], accel_limit=self.acc_limit, maximum_torque = 3, query=True),0.05)
+                    command6 = await asyncio.wait_for(self.c6.set_position(position=math.nan, velocity=self.velocity_command[5], accel_limit=self.acc_limit, maximum_torque = 3, query=True),0.05)
+
+                elif not self.ALLOW_WRITE:
+                    rospy.loginfo_throttle(0.3,"FEEDBACK")
+
+                    command1 = await asyncio.wait_for(self.c1.set_position(position=math.nan,
+                                                        query = True),0.05)
+                    command2 = await asyncio.wait_for(self.c2.set_position(position=math.nan,
+                                                        query = True),0.05)
+                    command3 = await asyncio.wait_for(self.c3.set_position(position=math.nan,
+                                                        query = True),0.05)
+                    command4 = await asyncio.wait_for(self.c4.set_position(position=math.nan,
+                                                        query = True),0.05)
+                    command5 = await asyncio.wait_for(self.c5.set_position(position=math.nan,
+                                                        query = True),0.05)
+                    command6 = await asyncio.wait_for(self.c6.set_position(position=math.nan,
+                                                        query = True),0.05)
+
+                else:
+                    rospy.loginfo_throttle(0.3, "POSITION")
+                    command1 = await asyncio.wait_for(self.c1.set_position(position = self.pos_command[0]*gear1/2+self.zero_pos[0], 
+                                                    velocity=0.0,
+                                                    accel_limit=0.7,
+                                                    velocity_limit = 0.4,
+                                                    maximum_torque = 4,
+                                                    watchdog_timeout=math.nan,
+                                                    query = True),0.05)
+                    command2 = await asyncio.wait_for(self.c2.set_position(position=((-self.pos_command[1]*gear2/2)+self.zero_pos[1]), 
+                                                    velocity=0.0,
+                                                    velocity_limit= 1.0,
+                                                    maximum_torque = 4,
+                                                    accel_limit=2.5,
+                                                    watchdog_timeout=math.nan,
+                                                    query = True),0.05)
+                    command3 = await asyncio.wait_for(self.c3.set_position(position=(self.pos_command[2]*gear3/2)+self.zero_pos[2], 
+                                                    velocity=0.0,
+                                                    velocity_limit=1.0,
+                                                    maximum_torque = 3.5,
+                                                    accel_limit=3.0,
+                                                    watchdog_timeout=math.nan,
+                                                    query = True),0.05)
+                    command4 = await asyncio.wait_for(self.c4.set_position(position=(self.pos_command[3]*gear4/2)+self.zero_pos[3], 
+                                                    velocity=0.0,
+                                                    velocity_limit=3,
+                                                    maximum_torque = 3,
+                                                    accel_limit=3,
+                                                    watchdog_timeout=math.nan,
+                                                    query = True),0.05)
+                    command5 = await asyncio.wait_for(self.c5.set_position(position=(-self.pos_command[4]*gear5/2)+self.zero_pos[4], 
+                                                    velocity=0.0,
+                                                    velocity_limit=1.0,
+                                                    maximum_torque = 3,
+                                                    accel_limit=1,
+                                                    watchdog_timeout=math.nan,
+                                                    query = True),0.05)
+                    command6 = await asyncio.wait_for(self.c6.set_position(position=(-self.pos_command[5]*gear6/2 + (self.pos_command[4]) * 0.115)+self.zero_pos[5], 
+                                                    velocity=0.0,
+                                                    velocity_limit=0.6,
+                                                    maximum_torque = 3,
+                                                    accel_limit=0.5,
+                                                    watchdog_timeout=math.nan,
+                                                    query = True),0.05)
+                    rospy.loginfo(f"{self.pos6/6.28}\n {(-self.pos_command[5]*gear6/2 + (self.pos_command[4]) * 0.115)+self.zero_pos[5]}")
+
+
+                gear1 = (40./12.)*(60./12.)
+                gear2 = (41./1.)
+                gear3 = (30./18.)*(30./1.)
+                gear4 = (28./1)
+                gear5 = (10.0/1.0)*(49.0/22.0)
+                gear6 = (49./22.)*(42./12.)
+
+                self.motor_pos = [(command1.values[moteus.Register.POSITION]), 
+                                (command2.values[moteus.Register.POSITION]), 
+                                (command3.values[moteus.Register.POSITION]),
+                                (command4.values[moteus.Register.POSITION]),
+                                (command5.values[moteus.Register.POSITION]),
+                                (command6.values[moteus.Register.POSITION])]
+                
+                self.temperatures = [(command1.values[moteus.Register.TEMPERATURE]),
+                                    (command2.values[moteus.Register.TEMPERATURE]),
+                                    (command3.values[moteus.Register.TEMPERATURE]),
+                                    (command4.values[moteus.Register.TEMPERATURE]),
+                                    (command5.values[moteus.Register.TEMPERATURE]),
+                                    (command6.values[moteus.Register.TEMPERATURE])]
+
+                self.moteus_modes= [(command1.values[moteus.Register.MODE]), 
+                                (command2.values[moteus.Register.MODE]), 
+                                (command3.values[moteus.Register.MODE]),
+                                (command4.values[moteus.Register.MODE]),
+                                (command5.values[moteus.Register.MODE]),
+                                (command6.values[moteus.Register.MODE])]
+                for n in self.temperatures:
+                    if n>60:
+                        rospy.logerr(self.temperatures)
+                    else: 
+                        rospy.logwarn_throttle(0.3, self.temperatures)
+
+                self.pos1 = (self.motor_pos[0]-self.zero_pos[0])/gear1*6.28
+                self.pos2 = -(self.motor_pos[1]-self.zero_pos[1])/gear2*6.28
+                self.pos3 = (self.motor_pos[2]-self.zero_pos[2])/gear3*6.28
+                self.pos4 = (self.motor_pos[3]-self.zero_pos[3])/gear4*6.28
+                self.pos5 = -(self.motor_pos[4]-self.zero_pos[4])/gear5*6.28
+                self.pos6 = -(self.motor_pos[5]-((self.motor_pos[4]-self.zero_pos[4]) * 0.115)-self.zero_pos[5])/gear6*6.28
+                #self.pos6 = -(self.motor_pos[5]-self.zero_pos[5])/gear6*6.28
+
+                self.feedback_pos.data = [self.pos1, self.pos2, self.pos3, self.pos4, self.pos5, self.pos6]
+                self.pub.publish(self.feedback_pos)
+            except asyncio.TimeoutError:
+                await self.flush()
+            await asyncio.sleep(0.05)
+
+if __name__=="__main__":
+    try:
+        asyncio.run(NaimDrive().main())
+        rospy.loginfo("finished")
+    except asyncio.CancelledError as e:
+        rospy.signal_shutdown("Keyboard Interrupt")
+    except KeyboardInterrupt:
+        rospy.signal_shutdown("Keyboard Interrupt")

@@ -1,0 +1,29 @@
+<launch>
+
+  <!-- GDB functionality -->
+  <arg name="debug" default="false" />
+
+  <!-- Load example URDF --> 
+  <param name="robot_description" textfile="$(find naim23_urdf)/urdf/naim23_urdf.urdf"/>
+    
+  <!-- Load hardware interface -->
+  <node name="arm23_hw_interface" pkg="arm23_control" type="arm23_hw_main" output="screen"/>
+
+  <!-- Load controller settings -->
+  <rosparam file="$(find arm23_control)/config/controllers.yaml" command="load"/>
+
+  <!-- Load controller manager -->
+  <node name="ros_control_controller_manager" pkg="controller_manager" type="controller_manager" respawn="false"
+  output="screen" args="spawn joint_state_controller manipulator_controller" />
+
+  <!-- Convert joint states to /tf tranforms -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+	
+  <include file="$(find arm23_config)/launch/move_group.launch">
+    <arg name="allow_trajectory_execution" value="true"/>
+    <arg name="info" value="true"/> 
+  </include> 
+
+  <remap from="/joint_states_desired" to="/joint_states"/>
+</launch>

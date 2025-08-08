@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-4-g7f85cfe  Build Version: 1.6.7995.38578
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="drivebase_urdf_usa">
+  <link
+    name="drive_link">
+    <inertial>
+      <origin
+        xyz="0.00372572735959894 0.0829549684617059 0.445450572474212"
+        rpy="0 0 0" />
+      <mass
+        value="35.2779066816817" />
+      <inertia
+        ixx="0.532293950729571"
+        ixy="1.53768705497388E-05"
+        ixz="-0.00126574927951486"
+        iyy="0.287613769138898"
+        iyz="-0.00010585864198594"
+        izz="0.444572361052671" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://naim23_urdf/meshes/drive_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://naim23_urdf/meshes/drive_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>
+

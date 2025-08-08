@@ -1,0 +1,5 @@
+<launch>
+
+  <!-- Moteus control node launch -->
+  <node pkg="arm23_teleop"  type="new_teleop.py" name="Moteus_tele_node" output="screen"/> 
+</launch>
