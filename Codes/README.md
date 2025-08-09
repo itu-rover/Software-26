@@ -1,5 +1,8 @@
 
-## Codes klasörü
+#  **Codes Klasörü**
 
-#Drive
-Aracı sürmek için kullanılan kodlar.
+##  **Drive**
+> **Görev:** Aracı sürmek için kullanılan kodları barındırır.
+
+## **Rover-Website**
+> **Görev:** Rover websitesinin kodlarını barındırır.
