@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>İTÜ Rover - Istanbul Technical University Rover Team</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <!-- Floating Theme Toggle Button -->
+    <div class="theme-toggle" id="themeToggle">
+      <i class="fas fa-sun" id="themeIcon"></i>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-content">
+        <div class="hero-image">
+          <img
+            src="https://placehold.co/1920x1080/c41e3a/ffffff?text=İTÜ+ROVER+2025"
+            alt="İTÜ Rover 2025"
+          />
+          <div class="hero-overlay">
+            <div class="hero-text">
+              <h1>ITU Rover Team</h1>
+              <p class="subtitle">Curious Enough</p>
+              <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <h2>Hakkımızda</h2>
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <h3>İTÜ Rover Nedir?</h3>
+          <p>
+            İTÜ Rover, Istanbul Teknik Üniversitesi bünyesinde faaliyet gösteren
+            disiplinler arası bir robotik takımıdır. Amacımız, Mars keşif
+            araçlarını tasarlayarak uluslararası yarışmalarda ülkemizi en iyi
+            şekilde temsil etmektir.
+          </p>
+
+          <h3>Misyonumuz</h3>
+          <p>
+            Uzay teknolojileri alanında yenilikçi çözümler geliştirerek, genç
+            mühendislerin bu alanda uzmanlaşmasını sağlamak ve Türkiye'nin uzay
+            sektöründeki konumunu güçlendirmektir.
+          </p>
+
+          <h3>Vizyonumuz</h3>
+          <p>
+            Dünya çapında tanınan, teknoloji transferi yapabilen ve uzay
+            sektörüne öncülük eden bir takım olmaktır.
+          </p>
+        </div>
+        <div class="rover-image fade-in">
+          <div class="rover-placeholder">
+            <div>
+              <i
+                class="fas fa-robot"
+                style="font-size: 4rem; margin-bottom: 1rem"
+              ></i>
+              <p>İTÜ ROVER 2025</p>
+              <p style="font-size: 0.9rem; opacity: 0.8">
+                Yeni Nesil Mars Keşif Aracı
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Teams Section -->
+    <section id="teams" class="section">
+      <h2>Ekiplerimiz</h2>
+      <p class="teams-intro">
+        Doç. Dr. Bilge Tutak'ın danışmanlığı altında çalışmalarına devam eden
+        ITU ROV Takımı; yazılım, elektronik, mekanik ve organizasyon olmak üzere
+        dört ekipten oluşmaktadır. Bahsedilen ekiplerin her biri için bir
+        yönetici ve bir takım yöneticisi olmak üzere toplamda altı kişilik bir
+        komisyon tarafından yönetilmektedir.
+      </p>
+
+      <div class="team-tabs">
+        <button class="team-tab active" data-team="electronics">
+          Elektronik
+        </button>
+        <button class="team-tab" data-team="software">Yazılım</button>
+        <button class="team-tab" data-team="mechanical">Mekanik</button>
+        <button class="team-tab" data-team="design">Tasarım</button>
+        <button class="team-tab" data-team="organization">Organizasyon</button>
+      </div>
+
+      <div class="team-content">
+        <div class="team-info active" id="electronics">
+          <div class="team-image">
+            <img
+              src="https://placehold.co/800x600/c41e3a/ffffff?text=Elektronik+Ekibi"
+              alt="Elektronik Ekibi"
+            />
+          </div>
+          <div class="team-details">
+            <h3>Elektronik Ekibi</h3>
+            <p class="team-description">
+              Rover'ımızın elektronik sistemlerinin tasarımı, geliştirilmesi ve
+              entegrasyonu ile ilgilenir. En son teknolojileri kullanarak
+              güvenilir ve verimli sistemler geliştirir.
+            </p>
+            <div class="team-responsibilities">
+              <div class="responsibility-column">
+                <h4>Ana Sorumluluklar</h4>
+                <ul>
+                  <li>PCB Tasarımı ve Üretimi</li>
+                  <li>Güç Sistemleri Yönetimi</li>
+                  <li>Sensör Entegrasyonu</li>
+                  <li>Kontrol Sistemleri</li>
+                </ul>
+              </div>
+              <div class="responsibility-column">
+                <h4>Teknik Yetkinlikler</h4>
+                <ul>
+                  <li>Altium Designer</li>
+                  <li>Arduino/Raspberry Pi</li>
+                  <li>Prototipleme</li>
+                  <li>Test ve Doğrulama</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-info" id="software">
+          <div class="team-image">
+            <img
+              src="https://placehold.co/800x600/c41e3a/ffffff?text=Yazılım+Ekibi"
+              alt="Yazılım Ekibi"
+            />
+          </div>
+          <div class="team-details">
+            <h3>Yazılım Ekibi</h3>
+            <p class="team-description">
+              Rover'ımızın yazılım altyapısını geliştirir ve otonom sistemlerin
+              programlanmasını sağlar. Yapay zeka ve makine öğrenmesi
+              teknolojilerini kullanarak akıllı sistemler tasarlar.
+            </p>
+            <div class="team-responsibilities">
+              <div class="responsibility-column">
+                <h4>Ana Sorumluluklar</h4>
+                <ul>
+                  <li>Otonom Navigasyon</li>
+                  <li>Görüntü İşleme</li>
+                  <li>Robot İşletim Sistemi</li>
+                  <li>Simülasyon</li>
+                </ul>
+              </div>
+              <div class="responsibility-column">
+                <h4>Teknik Yetkinlikler</h4>
+                <ul>
+                  <li>Python/C++</li>
+                  <li>ROS (Robot Operating System)</li>
+                  <li>OpenCV</li>
+                  <li>TensorFlow/PyTorch</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-info" id="mechanical">
+          <div class="team-image">
+            <img
+              src="https://placehold.co/800x600/c41e3a/ffffff?text=Mekanik+Ekibi"
+              alt="Mekanik Ekibi"
+            />
+          </div>
+          <div class="team-details">
+            <h3>Mekanik Ekibi</h3>
+            <p class="team-description">
+              Rover'ımızın mekanik tasarımı, üretimi ve test süreçlerini
+              yönetir. Dayanıklı ve hafif yapılar tasarlayarak Mars koşullarına
+              uygun sistemler geliştirir.
+            </p>
+            <div class="team-responsibilities">
+              <div class="responsibility-column">
+                <h4>Ana Sorumluluklar</h4>
+                <ul>
+                  <li>CAD Tasarımı</li>
+                  <li>Malzeme Seçimi</li>
+                  <li>Üretim Süreçleri</li>
+                  <li>Test ve Optimizasyon</li>
+                </ul>
+              </div>
+              <div class="responsibility-column">
+                <h4>Teknik Yetkinlikler</h4>
+                <ul>
+                  <li>SolidWorks</li>
+                  <li>3D Baskı</li>
+                  <li>CNC İşleme</li>
+                  <li>Finite Element Analizi</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-info" id="design">
+          <div class="team-image">
+            <img
+              src="https://placehold.co/800x600/c41e3a/ffffff?text=Tasarım+Ekibi"
+              alt="Tasarım Ekibi"
+            />
+          </div>
+          <div class="team-details">
+            <h3>Tasarım Ekibi</h3>
+            <p class="team-description">
+              Rover'ımızın görsel kimliğini ve kullanıcı deneyimini tasarlar.
+              Marka kimliği, web sitesi, sosyal medya içerikleri ve tanıtım
+              materyallerinin tasarımından sorumludur.
+            </p>
+            <div class="team-responsibilities">
+              <div class="responsibility-column">
+                <h4>Ana Sorumluluklar</h4>
+                <ul>
+                  <li>Görsel Kimlik Tasarımı</li>
+                  <li>Web Sitesi Tasarımı</li>
+                  <li>Sosyal Medya İçerikleri</li>
+                  <li>Tanıtım Materyalleri</li>
+                </ul>
+              </div>
+              <div class="responsibility-column">
+                <h4>Teknik Yetkinlikler</h4>
+                <ul>
+                  <li>Adobe Creative Suite</li>
+                  <li>UI/UX Tasarımı</li>
+                  <li>3D Modelleme</li>
+                  <li>Motion Graphics</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-info" id="organization">
+          <div class="team-image">
+            <img
+              src="https://placehold.co/800x600/c41e3a/ffffff?text=Organizasyon+Ekibi"
+              alt="Organizasyon Ekibi"
+            />
+          </div>
+          <div class="team-details">
+            <h3>Organizasyon Ekibi</h3>
+            <p class="team-description">
+              Takımın sosyal medya yönetimi, sponsorluk ilişkileri ve etkinlik
+              organizasyonlarını yürütür. Takımın tanıtımı ve iletişimi
+              konusunda stratejik kararlar alır.
+            </p>
+            <div class="team-responsibilities">
+              <div class="responsibility-column">
+                <h4>Ana Sorumluluklar</h4>
+                <ul>
+                  <li>Sosyal Medya Yönetimi</li>
+                  <li>Sponsorluk İlişkileri</li>
+                  <li>Etkinlik Organizasyonu</li>
+                  <li>İç İletişim</li>
+                </ul>
+              </div>
+              <div class="responsibility-column">
+                <h4>Teknik Yetkinlikler</h4>
+                <ul>
+                  <li>İçerik Üretimi</li>
+                  <li>Proje Yönetimi</li>
+                  <li>Etkinlik Planlama</li>
+                  <li>Stratejik İletişim</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vehicles Section -->
+    <section id="vehicles" class="section">
+      <h2>Araçlarımız</h2>
+      <div class="timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-marker"></div>
+          <div class="vehicle-card">
+            <div class="vehicle-image">
+              <img src="Images/rover-2025.jpg" alt="İTÜ Rover 2025" />
+            </div>
+            <div class="vehicle-content">
+              <h3>İTÜ Rover Mark IV</h3>
+              <div class="vehicle-period">
+                <i class="fas fa-calendar-alt"></i>
+                <span>2024 - 2025</span>
+              </div>
+              <div class="vehicle-competitions">
+                <span class="competition-tag urc">URC</span>
+                <span class="competition-tag erc">ERC</span>
+              </div>
+              <p>
+                Dördüncü nesil rover'ımız, gelişmiş otonom navigasyon sistemi ve
+                yenilikçi manipülatör kolu ile Mars keşif görevlerini simüle
+                edebilecek en gelişmiş modelimiz. Karbon fiber gövde ve modüler
+                tasarımı ile öne çıkıyor.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-marker"></div>
+          <div class="vehicle-card">
+            <div class="vehicle-image">
+              <img src="Images/rover-2024.jpg" alt="İTÜ Rover 2024" />
+            </div>
+            <div class="vehicle-content">
+              <h3>İTÜ Rover Mark III</h3>
+              <div class="vehicle-period">
+                <i class="fas fa-calendar-alt"></i>
+                <span>2023 - 2024</span>
+              </div>
+              <div class="vehicle-competitions">
+                <span class="competition-tag erc">ERC</span>
+              </div>
+              <p>
+                Üçüncü nesil rover'ımız ile Avrupa Rover Challenge'da başarılı
+                performans sergiledik. Gelişmiş kamera sistemi ve iyileştirilmiş
+                hareket kabiliyeti ile önceki modellere göre önemli ilerlemeler
+                kaydettik.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-marker"></div>
+          <div class="vehicle-card">
+            <div class="vehicle-image">
+              <img src="Images/rover-2023.jpg" alt="İTÜ Rover 2023" />
+            </div>
+            <div class="vehicle-content">
+              <h3>İTÜ Rover Mark II</h3>
+              <div class="vehicle-period">
+                <i class="fas fa-calendar-alt"></i>
+                <span>2022 - 2023</span>
+              </div>
+              <div class="vehicle-competitions">
+                <span class="competition-tag urc">URC</span>
+              </div>
+              <p>
+                İkinci nesil rover'ımız ile University Rover Challenge'a
+                katıldık. Arazi koşullarında test ettiğimiz bu model,
+                takımımızın deneyim kazanmasında önemli rol oynadı ve gelecek
+                projelerin temelini oluşturdu.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-marker"></div>
+          <div class="vehicle-card">
+            <div class="vehicle-image">
+              <img src="Images/rover-2022.jpg" alt="İTÜ Rover 2022" />
+            </div>
+            <div class="vehicle-content">
+              <h3>İTÜ Rover Mark I</h3>
+              <div class="vehicle-period">
+                <i class="fas fa-calendar-alt"></i>
+                <span>2021 - 2022</span>
+              </div>
+              <div class="vehicle-competitions">
+                <span class="competition-tag prototype">Prototype</span>
+              </div>
+              <p>
+                İlk rover prototipimiz. Takımımızın kuruluş döneminde
+                geliştirilen bu model, temel rover teknolojilerini öğrenmemizi
+                ve sonraki projelerimiz için sağlam bir temel oluşturmamızı
+                sağladı.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
+      <h2>Başarılarımız</h2>
+      <div class="timeline">
+        <div class="timeline-item fade-in">
+          <div class="timeline-marker"></div>
+          <div class="achievement-card">
+            <div class="achievement-image">
+              <img src="Images/award-2024.jpg" alt="ERC 2024 Ödülü" />
+            </div>
+            <div class="achievement-content">
+              <h3>Science Mission 2. Sıra</h3>
+              <span class="competition-tag main">ERC 2024</span>
+              <p>
+                European Rover Challenge 2024'te Science Mission kategorisinde
+                2. sırayı kazandık. Toprak analizi ve bilimsel deney
+                görevlerinde sergilediğimiz başarılı performans ile takımımızın
+                bilimsel yetkinliğini kanıtladık.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-marker"></div>
+          <div class="achievement-card">
+            <div class="achievement-image">
+              <img src="Images/award-2023-2.jpg" alt="ERC 2023 Ödülü 2" />
+            </div>
+            <div class="achievement-content">
+              <h3>Best Rookie Team Award</h3>
+              <span class="competition-tag main">ERC 2023</span>
+              <p>
+                İlk kez katıldığımız European Rover Challenge'da "En İyi Çaylak
+                Takım" ödülünü kazandık. Deneyimsiz olarak katıldığımız
+                yarışmada gösterdiğimiz performans ve takım ruhu ile jüri
+                tarafından takdir edildik.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-marker"></div>
+          <div class="achievement-card">
+            <div class="achievement-image">
+              <img src="Images/award-2023-1.jpg" alt="URC 2023 Ödülü" />
+            </div>
+            <div class="achievement-content">
+              <h3>Equipment Servicing Mission 3. Sıra</h3>
+              <span class="competition-tag main">URC 2023</span>
+              <p>
+                University Rover Challenge 2023'te Equipment Servicing Mission
+                kategorisinde 3. sırayı elde ettik. Manipülatör kolu kullanımı
+                ve ekipman bakım görevlerindeki başarımız ile podyuma çıktık.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item fade-in">
+          <div class="timeline-marker"></div>
+          <div class="achievement-card">
+            <div class="achievement-image">
+              <img src="Images/award-2022.jpg" alt="Ulusal Ödül 2022" />
+            </div>
+            <div class="achievement-content">
+              <h3>İnovasyon Teşvik Ödülü</h3>
+              <span class="competition-tag main">TÜBİTAK 2022</span>
+              <p>
+                TÜBİTAK Robotik Yarışması'nda geliştirdiğimiz yenilikçi rover
+                tasarımı ile İnovasyon Teşvik Ödülü'nü kazandık. Özgün
+                çözümlerimiz ve teknolojik yaklaşımımız jüri tarafından özel
+                olarak takdir edildi.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Competitions Section -->
+    <section id="competitions" class="section">
+      <h2>Katıldığımız Yarışmalar</h2>
+      <div class="competitions">
+        <div class="competition-card fade-in">
+          <div class="competition-image">
+            <i class="fas fa-rocket"></i>
+          </div>
+          <div class="competition-content">
+            <h3>University Rover Challenge</h3>
+            <div class="competition-date">
+              <i class="fas fa-calendar-alt"></i>
+              <span>28-31 Mayıs 2025</span>
+            </div>
+            <div class="competition-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Mars Desert Research Station, Hanksville, Utah, ABD</span>
+            </div>
+            <p>
+              Dünyanın en prestijli Mars rover yarışması. Takımımız bu yarışmada
+              Türkiye'yi temsil edecek ve uluslararası arenada İTÜ'nün
+              mühendislik gücünü gösterecek. Gerçek Mars koşullarını simüle eden
+              çöl ortamında rover'ımızın performansını test edeceğiz.
+            </p>
+          </div>
+        </div>
+
+        <div class="competition-card fade-in">
+          <div class="competition-image">
+            <i class="fas fa-globe-europe"></i>
+          </div>
+          <div class="competition-content">
+            <h3>European Rover Challenge</h3>
+            <div class="competition-date">
+              <i class="fas fa-calendar-alt"></i>
+              <span>29-31 Ağustos 2025</span>
+            </div>
+            <div class="competition-location">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>AGH University, Kraków, Polonya</span>
+            </div>
+            <p>
+              Avrupa'nın en büyük rover yarışması. Teknik yetkinliğimizi
+              kanıtlayacağımız ve Avrupa çapında İTÜ'yü temsil edeceğimiz önemli
+              platform. Çok sayıda Avrupa üniversitesi ile rekabet ederek
+              mühendislik becerilerimizi sergileyeceğiz.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sponsorship Section -->
+    <section id="sponsorship" class="section">
+      <h2>Sponsorlarımız & Destekçilerimiz</h2>
+      <p class="sponsorship-description">
+        İTÜ Rover takımının başarılarında katkısı bulunan değerli sponsorlarımız
+        ve destekçilerimiz
+      </p>
+
+      <div class="sponsors-grid">
+        <a
+          href="https://www.axa.com.tr"
+          target="_blank"
+          class="sponsor-card fade-in"
+        >
+          <div class="sponsor-logo">
+            <img src="Images/axa.svg" alt="AXA" />
+          </div>
+          <div class="sponsor-info">
+            <h4>AXA Sigorta</h4>
+            <p>Ana Sponsor</p>
+          </div>
+        </a>
+
+        <a
+          href="https://www.example2.com"
+          target="_blank"
+          class="sponsor-card fade-in"
+        >
+          <div class="sponsor-logo">
+            <img
+              src="https://via.placeholder.com/200x100/c41e3a/ffffff?text=SPONSOR+2"
+              alt="Sponsor 2"
+            />
+          </div>
+          <div class="sponsor-info">
+            <h4>Sponsor Adı 2</h4>
+            <p>Teknoloji Sponsoru</p>
+          </div>
+        </a>
+
+        <a
+          href="https://www.example3.com"
+          target="_blank"
+          class="sponsor-card fade-in"
+        >
+          <div class="sponsor-logo">
+            <img
+              src="https://via.placeholder.com/200x100/c41e3a/ffffff?text=SPONSOR+3"
+              alt="Sponsor 3"
+            />
+          </div>
+          <div class="sponsor-info">
+            <h4>Sponsor Adı 3</h4>
+            <p>Malzeme Sponsoru</p>
+          </div>
+        </a>
+
+        <a
+          href="https://www.example4.com"
+          target="_blank"
+          class="sponsor-card fade-in"
+        >
+          <div class="sponsor-logo">
+            <img
+              src="https://via.placeholder.com/200x100/c41e3a/ffffff?text=SPONSOR+4"
+              alt="Sponsor 4"
+            />
+          </div>
+          <div class="sponsor-info">
+            <h4>Sponsor Adı 4</h4>
+            <p>Ulaşım Sponsoru</p>
+          </div>
+        </a>
+
+        <a
+          href="https://www.example5.com"
+          target="_blank"
+          class="sponsor-card fade-in"
+        >
+          <div class="sponsor-logo">
+            <img
+              src="https://via.placeholder.com/200x100/c41e3a/ffffff?text=SPONSOR+5"
+              alt="Sponsor 5"
+            />
+          </div>
+          <div class="sponsor-info">
+            <h4>Sponsor Adı 5</h4>
+            <p>Donanım Sponsoru</p>
+          </div>
+        </a>
+
+        <a
+          href="https://www.example6.com"
+          target="_blank"
+          class="sponsor-card fade-in"
+        >
+          <div class="sponsor-logo">
+            <img
+              src="https://via.placeholder.com/200x100/c41e3a/ffffff?text=SPONSOR+6"
+              alt="Sponsor 6"
+            />
+          </div>
+          <div class="sponsor-info">
+            <h4>Sponsor Adı 6</h4>
+            <p>Destek Sponsoru</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+      <div class="map-container">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3008.0936659045324!2d29.025902315474045!3d41.10635717929871!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab59927c234cd%3A0x9b3b7e6a8c4a1234!2s%C4%B0stanbul%20Technical%20University%20Maslak%20Campus!5e0!3m2!1str!2str!4v1641234567890!5m2!1str!2str"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
+        </iframe>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>
+        İTÜ Rover'dan yazılı izin alınmadan bu sitedeki herhangi bir materyal
+        veya yazılımın kopyalanması yasaktır.
+      </p>
+      <p>&copy; 2025 İTÜ Rover. Tüm hakları saklıdır.</p>
+      <div class="social-links" style="margin-top: 1rem">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </footer>
+
+    <script>
+      // Theme Management
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      const body = document.body;
+
+      // Load saved theme or default to dark
+      let currentTheme = localStorage.getItem("theme") || "dark";
+      body.setAttribute("data-theme", currentTheme);
+      updateThemeIcon();
+
+      // Theme toggle handler - Simple dark/light toggle
+      themeToggle.addEventListener("click", () => {
+        currentTheme = currentTheme === "dark" ? "light" : "dark";
+
+        body.setAttribute("data-theme", currentTheme);
+        localStorage.setItem("theme", currentTheme);
+        updateThemeIcon();
+
+        // Add a subtle animation effect
+        body.style.transition = "all 0.5s ease";
+        setTimeout(() => {
+          body.style.transition = "";
+        }, 500);
+      });
+
+      // Update theme icon based on current theme
+      function updateThemeIcon() {
+        if (currentTheme === "light") {
+          themeIcon.className = "fas fa-moon";
+        } else {
+          themeIcon.className = "fas fa-sun";
+        }
+      }
+
+      // Team Tabs Management
+      const teamTabs = document.querySelectorAll(".team-tab");
+      const teamInfos = document.querySelectorAll(".team-info");
+
+      teamTabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          // Remove active class from all tabs and infos
+          teamTabs.forEach((t) => t.classList.remove("active"));
+          teamInfos.forEach((i) => i.classList.remove("active"));
+
+          // Add active class to clicked tab
+          tab.classList.add("active");
+
+          // Show corresponding team info
+          const teamId = tab.getAttribute("data-team");
+          document.getElementById(teamId).classList.add("active");
+        });
+      });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+
+      // Intersection Observer for fade-in animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".fade-in").forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
