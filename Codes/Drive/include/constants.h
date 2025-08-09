@@ -1,0 +1,28 @@
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
+
+#define OPEN_GRIPPER "S71F"
+#define CLOSE_GRIPPER "S31F"
+#define DEFAULT_GRIPPER "S51F"
+
+#define TIMESTAMP_SIZE 2
+#define OP_MODE_SIZE 2
+#define DRIVE_MESSAGE_SIZE 9
+#define NAIM_MESSAGE_SIZE 6
+#define SCIENCE_DATA_SIZE 4
+#define LED_MSG_SIZE 3
+
+
+#define OP_MODE_DRIVE_ACTIVE 0x01
+#define OP_MODE_NAIM_ACTIVE 0x02
+#define OP_MODE_SCIENCE_DATA 0x04
+#define OP_MODE_REQUEST_GPS 0x8
+#define OP_MODE_LED_DATA 0x10
+
+// Received data sizes
+#define GPS_DATA_SIZE 16
+
+
+
+
+#endif
