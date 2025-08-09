@@ -1,5 +1,3 @@
-# Prototip
-
 ## ROSPackages Klasörü
 
 ### arm23_config
