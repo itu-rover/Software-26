@@ -1,2 +1,1 @@
-prototip
 # Documentations klasörü
