@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot
+  name="no_steering_urdf">
+
+  <link name="os_sensor"></link>
+  <joint name="os_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="os_sensor" />
+    <origin xyz="-0.14 -0.3 0.20" rpy="0 0.026 0" />      <!-- <origin xyz="0.38 0.0 .1" rpy="0 0.026 0" /> -->
+  </joint>
+
+  <link name="camera_link"></link>
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="camera_link" />
+    <origin xyz="0.30 0.0 0.05" rpy="0 0.026 0" />
+  </joint>
+
+  <link name="base_link"></link>
+  <joint name="base_link_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="chassis_link" />
+    <origin xyz="0 0 0" rpy="-1.57 0 0" />
+  </joint>
+  
+  <link name="imu_link"></link>
+  <joint name="imu_link_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link" />
+    <origin xyz="0 0 0" rpy="0 0 0" />
+  </joint>
+
+  <link name="chassis_link">
+    <inertial>
+      <origin
+        xyz="0 0 0.78456"
+        rpy="0 0 0" />
+      <mass
+        value="4" />
+      <inertia
+        ixx="0.003204"
+        ixy="1.1451E-12"
+        ixz="-1.64E-11"
+        iyy="0.01026"
+        iyz="-5.1737E-05"
+        izz="0.012284" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0.216621 0.8054 0.0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/body.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/body.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <link
+    name="Left_Leg">
+    <inertial>
+      <origin
+        xyz="-0.078043 -0.017722 -0.24799"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="0.0069642"
+        ixy="-5.2914E-09"
+        ixz="-9.1335E-08"
+        iyy="0.0023409"
+        iyz="-0.00022677"
+        izz="0.0048315" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Left_Leg.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Left_Leg.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Left_Leg"
+    type="continuous">
+    <origin xyz="-0.276499 0.0 0.13895" rpy="1.57 0 0" />
+    <parent
+      link="chassis_link" />
+    <child
+      link="Left_Leg" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  
+  <joint
+    name="Right_Leg"
+    type="continuous">
+    <origin
+      xyz="0.276499 0.0 0.13895"
+      rpy="1.57 0 0" />
+    <parent
+      link="chassis_link" />
+    <child
+      link="Right_Leg" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+
+  <link
+    name="Wheel1">
+    <inertial>
+      <origin
+        xyz="-0.11233 1.0521E-05 -1.1432E-05"
+        rpy="0 0 0" />
+      <mass
+        value="1.5" />
+      <inertia
+        ixx="0.02666"
+        ixy="6.8923E-07"
+        ixz="-2.8124E-07"
+        iyy="0.014545"
+        iyz="1.5271E-07"
+        izz="0.014543" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Wheel1.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Wheel1.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Wheel11"
+    type="continuous">
+    <origin
+      xyz="-0.053 0.46945 -0.32241"
+      rpy="0.19742 0 0" />
+    <parent
+      link="Left_Leg" />
+    <child
+      link="Wheel1" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="Wheel2">
+    <inertial>
+      <origin
+        xyz="-0.11233 1.021E-05 -1.1519E-05"
+        rpy="0 0 0" />
+      <mass
+        value="1.5" />
+      <inertia
+        ixx="0.02666"
+        ixy="6.9823E-07"
+        ixz="-9.1967E-08"
+        iyy="0.014545"
+        iyz="-2.6746E-07"
+        izz="0.014543" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Wheel2.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Wheel2.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Wheel22"
+    type="continuous">
+    <origin
+      xyz="-0.053 -0.50967 -0.31872"
+      rpy="-0.086434 0 0" />
+    <parent
+      link="Left_Leg" />
+    <child
+      link="Wheel2" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="Right_Leg">
+    <inertial>
+      <origin
+        xyz="0.077201 -0.018423 -0.25649"
+        rpy="0 0 0" />
+      <mass
+        value="1" />
+      <inertia
+        ixx="0.0068991"
+        ixy="-2.0111E-07"
+        ixz="4.3194E-09"
+        iyy="0.0023272"
+        iyz="-0.00022906"
+        izz="0.0047798" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Right_Leg.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Right_Leg.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="Wheel3">
+    <inertial>
+      <origin
+        xyz="-0.11233 9.9451E-06 -1.1642E-05"
+        rpy="0 0 0" />
+      <mass
+        value="1.5" />
+      <inertia
+        ixx="0.026659"
+        ixy="7.266E-07"
+        ixz="-5.4284E-07"
+        iyy="0.014544"
+        iyz="5.3464E-09"
+        izz="0.014544" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Wheel3.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Wheel3.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Wheel33"
+    type="continuous">
+    <origin
+      xyz="0.053 0.46945 -0.32241"
+      rpy="-1.9264 0 3.1416" />
+    <parent
+      link="Right_Leg" />
+    <child
+      link="Wheel3" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+  <link
+    name="Wheel4">
+    <inertial>
+      <origin
+        xyz="-0.11233 9.8627E-06 -1.1769E-05"
+        rpy="0 0 0" />
+      <mass
+        value="1.5" />
+      <inertia
+        ixx="0.026659"
+        ixy="7.3676E-07"
+        ixz="-5.4751E-07"
+        iyy="0.014544"
+        iyz="-1.4948E-09"
+        izz="0.014544" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Wheel4.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://no_steering_urdf/meshes/Wheel4.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Wheel44"
+    type="continuous">
+    <origin
+      xyz="0.053 -0.50967 -0.31872"
+      rpy="1.2152 0 3.1416" />
+    <parent
+      link="Right_Leg" />
+    <child
+      link="Wheel4" />
+    <axis
+      xyz="1 0 0" />
+  </joint>
+</robot>

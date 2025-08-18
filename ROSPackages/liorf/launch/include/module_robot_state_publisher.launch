@@ -1,0 +1,14 @@
+<launch>
+
+	<arg name="project" default="liorf"/>
+
+    <param name="robot_description" command="$(find xacro)/xacro $(find no_steering_urdf)/urdf/no_steering_urdf.urdf --inorder" />
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true">
+        <!-- <param name="tf_prefix" value="$(env ROS_HOSTNAME)"/> -->
+    </node>
+    
+    <!-- <node name="odom_to_base" pkg="tf" type="static_transform_publisher" args="-0.3 0 -0.24 0 0 0 lidar_link base_link 200"/> -->
+    <!-- <node name="chase_to_lidar" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 chassis_link base_link 200"/> -->
+
+</launch>
