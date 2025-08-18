@@ -1,0 +1,25 @@
+footprint_topic: "footprint"
+robot_radius: 0.6 #0.8485
+footprint_padding: 0.1 #0.01 
+footprint: [[-0.7, -0.5], [-0.7, 0.6], [0.7, 0.6], [0.7, -0.5]]
+
+robot_base_frame: base_link
+update_frequency: 6.0 #4.0
+publish_frequency: 5.0 #4.0 #3.0
+transform_tolerance: 0.5
+
+resolution: 0.1 #0.05
+
+obstacle_range: 10 #5.5
+raytrace_range: 12.0 #6.0
+
+obstacles_laser:
+    footprint_clearing_enabled: false
+
+    observation_sources: laser
+    laser: {data_type: LaserScan, clearing: true, marking: true, topic: scan, inf_is_valid: true}
+    subscribe_to_updates: true
+
+inflation:
+    inflation_radius: 15 
+    cost_scaling_factor: 4

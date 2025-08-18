@@ -1,0 +1,48 @@
+footprint_topic: "footprint"
+robot_radius: 1.5 #1.15 #0.8485
+footprint_padding: 0.1 #0.01 
+# footprint: [[-0.55, -0.4], [-0.55, 0.4], [0.60, 0.4], [0.60, -0.40]] # for navigation
+
+
+robot_base_frame: base_link #base_footprint
+update_frequency: 10.0 #10.0 #1.0  
+publish_frequency: 10.0 #10.0 #1 #4.0 #3.0
+transform_tolerance: 1.0 #1.5
+
+resolution: 0.1 #0.05
+
+obstacle_range: 4 #5.5
+raytrace_range: 5 #6.0
+
+# obstacles_laser:
+#     footprint_clearing_enabled: true
+
+#     observation_sources: laser
+#     laser: {data_type: LaserScan, clearing: true, marking: true, topic: /scan, inf_is_valid: true}
+#     subscribe_to_updates: true
+
+
+obstacles_laser:
+#  footprint_clearing_enabled: true #new
+ observation_sources: point_cloud_sensor
+ point_cloud_sensor: {
+   data_type: PointCloud2,
+   clearing: true,
+   min_obstacle_height: 0.1,
+   marking: true,
+   topic: /ouster/points
+ }
+
+# obstacles_laser:
+#   observation_sources: scan
+#   scan: {
+#     data_type: LaserScan,
+#     clearing: true,
+#     marking: true,
+#     topic: /scan,
+#     min_obstacle_height: 0.0,
+#     inf_is_valid: true
+#   }
+
+inflation:
+  inflation_radius: 1 #0.4 # was 1.0, 2.0 #0.7

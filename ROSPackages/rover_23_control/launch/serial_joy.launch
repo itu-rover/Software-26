@@ -1,0 +1,7 @@
+<launch>
+
+	<node pkg="joy" type="joy_node" name="joy" output="screen"/>
+	<node pkg="rover_23_control" type="joy2twist.py" name="joy2twist" output="screen"/>
+
+</launch>
+

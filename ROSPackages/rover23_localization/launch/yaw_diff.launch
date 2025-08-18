@@ -1,0 +1,7 @@
+<launch>
+
+  <node pkg="rover23_localization" type="yaw_diff.py" name="yaw_diff" output="screen">
+    <param name="yaw_file_path" type="str" value="/home/iturover/iturover23_ws/src/rover23_localization/data/yaw_diff.csv"/>
+  </node> 
+  
+</launch>

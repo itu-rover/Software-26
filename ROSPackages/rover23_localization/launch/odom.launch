@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--group ns="itu_rover"-->
+ <rosparam command="load" file="$(find rover23_localization)/scripts/params/ekf_params3.yaml"/>
+  <!-- <rosparam command="load" file="$(find rover_21_localization)/params/clap_params/navsat_params.yaml" /> -->
+
+  <node name="sbg_device" pkg="sbg_driver" type="sbg_device" output="screen">
+  	<rosparam command="load" file="$(find rover23_localization)/config/imu.yaml" />
+  </node>
+
+  <!-- <include file="$(find rover23_localization)/launch/sick_mrs1000.launch"/> -->
+
+      <!-- - Robot State TF -->
+ <include file="$(find liorf)/launch/include/module_robot_state_publisher.launch" />
+
+ <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" clear_params="true"/>
+
+ <node name="erc_odom" pkg="rover23_localization" type="erc_odom.py" output="screen"></node>
+
+ <!-- <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" clear_params="true">
+   <remap from="odometry/filtered" to="odometry/filtered_map"/>
+ </node> -->
+
+  <node name="odom_to_map" pkg="tf" type="static_transform_publisher" args="-0.1 0.1 0.0 0.0 0.0 0 map odom 200" />
+   <!-- <node name="odom_to_base" pkg="tf" type="static_transform_publisher" args="-0.1 0.1 0.0 0.0 0.0 0 odom base_link 200" />      -->
+
+
+  <!--/group-->
+</launch>
