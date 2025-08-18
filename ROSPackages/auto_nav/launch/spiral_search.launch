@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="auto_nav" type="ss.py" respawn="false" name="ss_demo" output="screen"></node>
+    <node pkg="rqt_py_trees" type="rqt_py_trees" respawn="false" name="rqt_py_trees" output="screen"></node>
+    <node name="rviz" pkg="rviz" type="rviz" respawn="false" args="-d $(find auto_nav)/rviz/ss.rviz" required="true" />
+</launch>
