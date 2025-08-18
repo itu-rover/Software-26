@@ -1,0 +1,124 @@
+controller_frequency: 10.0
+global_plan_topic: global_plan
+global_plan_type: Path3D
+global_plan_epsilon: -1.0
+twist_topic: /nav_vel
+twist_type: Twist3D
+recovery_behavior_enabled: true
+
+NavfnROS:
+  allow_unknown: true # Specifies whether or not to allow navfn to create plans that traverse unknown space.
+  default_tolerance: 1.0 # A tolerance on the goal point for the planner.
+
+DluxGlobalPlanner:
+  neutral_cost: 50
+  scale: 3.0
+  unknown_interpretation: free
+  path_caching: false
+  improvement_threshold: -1.0
+  publish_potential: true
+  print_statistics: true
+  potential_calculator: dlux_plugins::AStar
+  traceback: dlux_plugins::GradientPath
+
+  # AStar
+  manhattan_heuristic: false
+  use_kernel: true
+  minimum_requeue_change: 1.0
+
+  # GradientPath
+  step_size: 0.5
+  lethal_cost: 250.0
+  iteration_factor: 4.0
+  grid_step_near_high: false
+
+LocalPlannerAdapter:
+  planner_name: dwb_local_planner::DWBLocalPlanner
+
+DWBLocalPlanner:
+  update_costmap_before_planning: true
+  prune_plan: true
+  prune_distance: 1.0
+  short_circuit_trajectory_evaluation: true
+  debug_trajectory_details: false
+#  publish_cost_grid_pc: true
+
+  trajectory_generator_name: dwb_plugins::LimitedAccelGenerator
+  # velocities
+  min_vel_x: 0.0 
+  max_vel_x: 0.8 
+
+  min_vel_y: 0.0 
+  max_vel_y: 0.0 
+  
+  max_vel_theta: 1.2
+  min_vel_theta: 0.3
+  min_in_place_vel_theta: 0.3
+  # acceleration 
+  acc_lim_x: 2.4
+  acc_lim_y: 0
+  acc_lim_theta: 4
+  # deceleration
+  decel_lim_x: -2.4
+  decel_lim_y: 0.0
+  decel_lim_theta: -4
+  # absolute speeds (in either direction)
+  min_speed_xy: 0.1
+  max_speed_xy: 0.8
+  min_speed_theta: 0.3
+  max_speed_theta: 1.6
+
+  goal_checker_name: dwb_plugins::SimpleGoalChecker
+  xy_goal_tolerance: 0.3
+  yaw_goal_tolerance: 0.3
+  latch_xy_goal_tolerance: true
+
+  sim_time: 3.0
+  linear_granularity: 0.05
+  vx_samples: 15
+  vy_samples: 0
+  vtheta_samples: 20
+
+  critics:
+  - PreferForward
+  - RotateToGoal
+  - Oscillation
+
+  - PathDist
+  - PathAlign
+  - GoalDist
+  - GoalAlign
+
+  # - RotateBeforeStart
+  #- Titrek
+
+  PreferForward:
+    backward_cost: 1.0
+    forward_cost: 0.0
+    scale: 1.0
+
+  # RotateToGoal critic
+  RotateToGoal:
+    xy_goal_tolerance: 0.1
+    trans_stopped_velocity: 0.05
+    slowing_factor: 5.0
+    lookahead_time: -1.0
+    scale: 20.0
+
+  # Oscillation critic
+  Oscillation:
+    x_only_threshold: -0.05
+    oscillation_reset_dist: 0.1
+    oscillation_reset_angle: 0.1
+    oscillation_reset_time: 2
+    scale: 20.0
+  PathDist:  
+    scale: 48.0  
+  GoalDist:  
+    scale: 25.0  
+  PathAlign:  
+    scale: 44.0  
+    forward_point_distance: 0.325  
+  GoalAlign:  
+    scale: 32.0  
+

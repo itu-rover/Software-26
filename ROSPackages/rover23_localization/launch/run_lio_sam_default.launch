@@ -1,0 +1,27 @@
+<launch>
+
+    <arg name="project" default="liorf"/>
+    
+    <!-- Parameters -->
+    <rosparam file="$(find rover23_localization)/config/liorf.yaml" command="load"/>
+
+    <!--- LOAM -->
+    <include file="$(find liorf)/launch/include/module_loam.launch" />
+
+    <!--- Run Navsat -->
+    <!-- <include file="$(find liorf)/launch/include/module_navsat.launch" /> -->
+
+
+    <!--- Robot State TF -->
+    <include file="$(find liorf)/launch/include/module_robot_state_publisher.launch" /> 
+
+    <!-- <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" clear_params="true"/> -->
+
+    <node name="odom_to_liorf" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0 0 odom_lidar odom 200"/>
+    <node name="base_to_mapping" pkg="tf" type="static_transform_publisher" args="0 0 0.0 0.0 0 0 base_link odom_mapping 200"/>
+    <node name="odom_to_os" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0.0 0 base_link os_sensor 200"/> 
+    <!-- <node name="odom_to_base" pkg="tf" type="static_transform_publisher" args="0 0 0.0 0.0 0 0 odom_lidar base_link 200"/> -->
+    <!--- Run Navsat -->
+    <!-- <include file="$(find liorf)/launch/include/module_navsat.launch" /> -->
+
+</launch>

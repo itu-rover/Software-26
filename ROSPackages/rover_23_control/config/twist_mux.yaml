@@ -1,0 +1,37 @@
+topics:
+- name    : navigation
+  topic   : /nav_vel1
+  timeout : 0.5
+  priority: 50
+
+- name    : joystick
+  topic   : /joystick/twist
+  timeout : 0.5
+  priority: 100
+
+- name    : robot_steering
+  topic   : /rqt_vel
+  timeout : 0.5
+  priority: 90
+
+- name    : hand_drive
+  topic   : /cmd_hand_drive
+  timeout : 0.5
+  priority: 100
+
+- name    : lora_twist
+  topic   : /lora/rover/received/twist
+  timeout : 5.0
+  priority: 120
+
+- name    : e_stop
+  topic   : /stop
+  timeout : 0.5
+  priority: 255 
+
+locks:
+- name    : e_stop_lock
+  topic   : /emergency_stop
+  timeout : 0.0
+  priority: 255
+

@@ -1,0 +1,23 @@
+<launch>
+
+<arg name="delay" default="0.5"/>
+
+<!-- <include file="$(find ros_imu_bno055)/launch/imu.launch" /> -->
+
+<node pkg="rover_23_control" type="pitch_serial.py" name="serial" output="screen"/>
+<node pkg="rover_23_control" type="led_publisher.py" name="led" output="screen"/>
+<node pkg="rover_23_control" type="status_publisher.py" name="status" output="screen"/>
+
+<!-- <node pkg="rosserial_python" type= "serial_node.py" name= "solSTM" args="/dev/ttyledSTM"/> -->
+<node pkg="rosserial_python" type= "serial_node.py" name= "sagSTM" args="/dev/ttyrightSTM"/> 
+<node pkg="rosserial_python" type= "serial_node.py" name= "solSTM" args="/dev/ttyleftSTM" />
+<!-- <node pkg="rosserial_python" type= "serial_node.py" name= "science" args="/dev/ttyUSB0" />  -->
+
+<node pkg="twist_mux" type="twist_mux" name="twist_mux">
+    <rosparam command="load" file="$(find rover_23_control)/config/twist_mux.yaml" />
+    <remap from="cmd_vel_out" to="/cmd_vel"/>
+</node> 
+
+
+</launch>
+

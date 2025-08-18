@@ -1,0 +1,32 @@
+<launch>
+
+  <!-- Parameters -->
+  <rosparam file="$(find rover23_localization)/config/liorf_science.yaml" command="load" />
+
+  <!--- LOAM -->
+  <include file="$(find liorf)/launch/include/module_loam.launch" />
+
+  <!--- Robot State TF -->
+  <include file="$(find liorf)/launch/include/module_science_robot_state_publisher.launch" /> 
+
+  <node name="odom_to_liorf" pkg="tf" type="static_transform_publisher" args="0 0 -0.8 0 0 0 odom_lidar odom 200"/>
+
+  <node pkg="subt_solution_launch" type="base_link_flattener" name="base_link_flattener">
+  </node>
+
+  <!-- static transform publisher setup for the "flattened" sensor frame -->
+  <node pkg="tf" type="static_transform_publisher" name="sensor_frame_broadcaster"
+    args="0.38 0 0.1 0 0 0 fake fake/sensor_fake 100" />
+
+  <node pkg="subt_solution_launch" type="point_cloud_filter" name="pc_filter" output="screen">
+    <param name="flat_height" value="2.25"/>
+    <param name="slope" value="4"/>   <!-- 5 2 -->
+  </node>
+
+</launch>
+
+
+    
+
+
+

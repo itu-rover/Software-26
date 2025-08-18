@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <arg name="param_file_name"     doc="nmea" />
+  <arg name="param_file_dir"      doc="nmea.yaml"
+                                  default="/home/melike/gps_ws/src/ublox/ublox_gps/config" />
+
+  <arg name="node_name"           doc="name of this node"
+                                  default="ublox" />
+  <arg name="output"              default="screen" />
+  <arg name="respawn"             default="true" />
+  <arg name="respawn_delay"       default="30" />
+  <arg name="clear_params"        default="true" />
+
+  <node pkg="ublox_gps" type="ublox_gps" name="$(arg node_name)"
+        output="$(arg output)"
+        clear_params="$(arg clear_params)"
+        respawn="$(arg respawn)"
+        respawn_delay="$(arg respawn_delay)">
+    <rosparam command="load"
+              file="/home/melike/gps_ws/src/ublox/ublox_gps/config/nmea.yaml" />
+  </node>
+</launch>		

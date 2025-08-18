@@ -1,0 +1,5 @@
+<launch>
+  <node name="sbg_device" pkg="sbg_driver" type="sbg_device" output="screen">
+  	<rosparam command="load" file="$(find rover23_localization)/config/imu.yaml" />
+  </node>
+</launch>

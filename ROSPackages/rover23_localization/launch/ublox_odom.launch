@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!--group ns="itu_rover"-->
+ <rosparam command="load" file="$(find rover23_localization)/scripts/params/ekf_params2.yaml" />
+  <!-- <rosparam command="load" file="$(find rover_21_localization)/params/clap_params/navsat_params.yaml" /> -->
+
+  <!--rosparam param="datum">[39.2405593, -111.070175, 0.0, map, base_link] </rosparam-->
+  <!-- <node name="clap_odom" pkg="rover23_localization" type="clap_odom.py" output="screen"></node> -->
+  <node name="ara_gaz" pkg="rover23_localization" type="ara_gaz.py" output="screen"></node>
+  <node name="ublox_odom" pkg="rover23_localization" type="ublox_odom.py" output="screen"></node>
+
+      <!-- - Robot State TF -->
+<include file="$(find liorf)/launch/include/module_robot_state_publisher.launch" />
+
+ <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" clear_params="true"/>
+
+ <!-- <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" clear_params="true">
+   <remap from="odometry/filtered" to="odometry/filtered_map"/>
+ </node> -->
+
+ <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform" clear_params="true" output="screen" >
+     <!-- <remap from="odometry/filtered" to="odometry/filtered_map"/> -->
+     <remap from="gps/fix" to="/gps/fix"/>
+     <!-- <remap from="imu/data" to="/clap/ros/imu"/> -->
+</node>
+  
+  <node name="odom_to_map" pkg="tf" type="static_transform_publisher" args="-0.1 0.1 0.0 0.0 0.0 0 map odom 200" />
+
+   <!-- <node name="odom_to_base" pkg="tf" type="static_transform_publisher" args="-0.1 0.1 0.0 0.0 0.0 0 odom base_link 200" />      -->
+ <node name="base_to_gnss" pkg="tf" type="static_transform_publisher" args="-0.1 0.1 0.0 0.0 0.0 0 base_link GNSS_INS/gnss_ins_link 200" /> 
+ <node name="base_to_gps" pkg="tf" type="static_transform_publisher" args="-0.1 0.1 0.0 0.0 0.0 0 base_link gps 200" /> 
+ <node name="odom_to_os" pkg="tf" type="static_transform_publisher" args="0 0 0 0 0.0 0 base_link os_sensor 200"/> 
+ <!-- <node name="base_to_odom" pkg="tf" type="static_transform_publisher" args="-0.1 0.1 0.0 0.0 0.0 0 base_link base_footprint 200" />  -->
+ <!-- <node name="base_to_imu" pkg="tf" type="static_transform_publisher" args="-0.1 0.1 0.0 0.0 0.0 0 imu_link base_link 200" />   -->
+
+
+  <!--/group-->
+</launch>
