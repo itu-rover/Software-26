@@ -1,0 +1,22 @@
+[Unit]
+Description=Camera stream for %i
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+
+# Load the camera‑specific variables
+EnvironmentFile=/etc/cam.d/%i.env
+
+# Wait until the USB node really exists
+ExecStartPre=/bin/sh -c 'until [ -e "${CAM_DEVICE}" ]; do sleep 0.5; done'
+
+# Generic wrapper does the heavy lifting
+ExecStart=/usr/local/bin/run_cam.sh
+Restart=on-failure
+RestartSec=1
+User=ubuntu
+
+[Install]
+WantedBy=multi-user.target
