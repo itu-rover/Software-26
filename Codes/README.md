@@ -6,3 +6,6 @@
 
 ## **Rover-Website**
 > **Görev:** Rover websitesinin kodlarını barındırır.
+
+## **gtk2**
+> **Görev:** Rover kameraları için arayüz.
