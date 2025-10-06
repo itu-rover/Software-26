@@ -9,6 +9,7 @@ Burada, takımın ihtiyaç duyduğu tüm teknik dokümantasyonlar ve yazılım k
 - **Codes:** ROS harici kullanılan yazılımlar ve açıklamaları
 - **Dokümantasyon:** Atölye düzeni, süreçler, kullanım kılavuzları ve araştırma raporları
 - **Drone:** Drone kodları ve drone'da kullanılan yazılımlar
+  **MeetingNotes:** Toplantı notları
 - **Görev Takibi:** GitHub Issues ve Projects ile görevlerin planlanması ve takibi
 
 ## Kullanım
