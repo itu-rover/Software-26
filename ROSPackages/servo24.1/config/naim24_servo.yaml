@@ -1,0 +1,55 @@
+# --- Frames & group (bunları kendi MoveIt kurulumuna göre doğrula) ---
+planning_frame: arm_base
+robot_link_command_frame: arm_base
+ee_frame_name: end_effector
+move_group_name: manipulator     # SRDF'ten
+
+# --- Joint feedback ---
+joint_topic: /joint_states
+
+# --- Inputs (sen TwistStamped veya JointJog yayınlayacaksın) ---
+cartesian_command_in_topic: /servo_server/delta_twist_cmds
+twist_command_in_topic:     /servo_server/delta_twist_cmds
+joint_command_in_topic:     /servo_server/delta_joint_cmds
+command_in_type: "speed_units"   # m/s & rad/s
+
+# --- Outputs (gömülü tarafın okuyacağı ROS topic) ---
+command_out_type: trajectory_msgs/JointTrajectory
+command_out_topic: /servo_server/joint_cmds
+publish_joint_traj: true
+publish_joint_positions:  false
+publish_joint_velocities: true
+publish_joint_accelerations: false
+
+# --- Timing / filters ---
+publish_period: 0.01          # 100 Hz
+low_latency_mode: false
+low_pass_filter_coeff: 2.0
+incoming_command_timeout: 0.2
+num_outgoing_halt_msgs_to_publish: 4
+use_gazebo: false
+
+# --- Scaling (speed_units olduğundan komutların gerçek birimlerde) ---
+scale:
+  linear: 0.6
+  rotational: 0.6
+  joint: 0.6
+
+# --- Singularity & limits ---
+lower_singularity_threshold: 30.0
+hard_stop_singularity_threshold: 450.0
+joint_limit_margin: 0.2
+
+# --- Collision (bu pakette kapalı tutuyoruz) ---
+check_collisions: false
+collision_check: false
+collision_check_rate: 50.0
+collision_check_type: threshold_distance
+collision_distance_safety_factor: 1.0
+min_allowable_collision_distance: 0.01
+self_collision_proximity_threshold: 0.01
+scene_collision_proximity_threshold: 0.01
+
+# --- Status topics ---
+status_topic:  /servo_server/status
+warning_topic: /servo_server/status

@@ -71,3 +71,5 @@ SBG marka IMU'lar için standart driver ve bu cihazlara özel ROS mesaj (sbg_msg
 
 ### ublox
 U-blox marka GPS alıcısından veri alıp işleyerek EKF'nin ana girdilerinden biri olan /ublox/odom odometrisini üreten sürücü ve işlem paketidir.
+### servo24.1
+Robot kol için moveit_servo ile haberleşen kartezyen teleoperasyon ve singularite(demo) uygulaması paketi.
