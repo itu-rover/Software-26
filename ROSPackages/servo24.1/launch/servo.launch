@@ -1,0 +1,28 @@
+<launch>
+  <arg name="use_guard"  default="true"/>   <!-- bilek singularity koruması -->
+  <!-- Servo paramlarını yükle -->
+  <rosparam command="load"
+            ns="servo_server"
+            file="$(find arm24_servo)/config/naim24_servo.yaml"/>
+
+  <!-- MoveIt Servo server -->
+  <node name="servo_server" pkg="moveit_servo" type="servo_server" output="screen"/>
+   <rosparam ns="robot_description_planning"
+            command="load"
+            file="$(find arm23_config)/config/joint_limits.yaml"/>
+
+  <group if="$(arg use_guard)">
+    <node pkg="arm24_servo" type="wrist_singguard.py" name="wrist_guard" output="screen">
+  <param name="joint_name"   value="joint5"/>
+  <param name="pref_sign"    value="1.0"/>   <!-- + ise +açıl, - ise -açıl -->
+  <param name="target_mag"   value="0.35"/>  <!-- hedef kırıklık (rad) -->
+  <param name="eps_enter"    value="0.25"/>  <!-- 0'a bu kadar yakınsa devreye gir -->
+  <param name="eps_exit"     value="0.35"/>  <!-- bundan uzaklaşınca bırak -->
+  <param name="max_rad_s"    value="0.20"/>
+  <param name="gain"         value="2.0"/>
+  <param name="scale_joint"  value="0.5"/>   <!-- YAML: scale.joint ile aynı -->
+  <param name="pub_rate"     value="50"/>
+</node>
+  </group>
+
+</launch>
