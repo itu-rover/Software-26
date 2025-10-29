@@ -11,6 +11,7 @@ Burada, takımın ihtiyaç duyduğu tüm teknik dokümantasyonlar ve yazılım k
 - **Drone:** Drone kodları ve drone'da kullanılan yazılımlar
 - **MeetingNotes:** Toplantı notları
 - **Görev Takibi:** GitHub Issues ve Projects ile görevlerin planlanması ve takibi
+- **Rosbag Kayıtları:** Rosbag kayıtları bu dosyada tutulur.
 
 ## Kullanım
 
