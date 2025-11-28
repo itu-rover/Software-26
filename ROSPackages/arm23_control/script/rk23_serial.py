@@ -70,7 +70,7 @@ class NaimDrive():
         
         end_marker = b"X"
         start_marker = b"S"
-        package_size = 31
+        package_size = 26 # in some STM codes its 31 bytes so, if not work write 31 instead
 
         first_data = self.ser.read(package_size * 2)
         self.ser.read(first_data.find(start_marker))
