@@ -40,4 +40,7 @@ Hassas konumlandırma (DGPS/RTK) için kullanılan RTCM düzeltme verileri için
 Robot kol için moveit_servo ile haberleşen kartezyen teleoperasyon ve singularite(demo) uygulaması paketi.
 
 ### iturover26_ws
-General workspace for autonomous task.
+General workspace for URC autonomous task.
+
+### RoverSim26_ws
+General simulation for URC autonomy.
