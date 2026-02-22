@@ -9,3 +9,6 @@
 
 ## **gtk2**
 > **Görev:** Rover kameraları için arayüz.
+
+## **RGB_analysis**
+> **Görev:** RGB analizi için bilim tarafınca kullanılan bir arayüz.
