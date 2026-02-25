@@ -7,6 +7,9 @@
 ## **Rover-Website**
 > **Görev:** Rover websitesinin kodlarını barındırır.
 
+## **Camera_UI**
+> **Görev:** Rover kameraları için ana arayüz.
+
 ## **gtk2**
 > **Görev:** Rover kameraları için arayüz.
 
