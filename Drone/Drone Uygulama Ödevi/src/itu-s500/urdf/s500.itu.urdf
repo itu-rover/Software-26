@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="itu_s500">
+
+  <xacro:property name="M_PI" value="3.1415926535897931"/>
+
+  <xacro:include filename="$(find itu_s500_description)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find itu_s500_description)/urdf/itu_s500.trans"/>
+  <xacro:include filename="$(find itu_s500_description)/urdf/itu_s500.gazebo"/>
+
+  <xacro:include filename="$(find hector_quadrotor_gazebo)/urdf/quadrotor_sensors.gazebo.xacro"/>
+  <xacro:include filename="$(find hector_quadrotor_gazebo)/urdf/quadrotor_controller.gazebo.xacro"/>
+  <xacro:include filename="$(find hector_quadrotor_gazebo)/urdf/quadrotor_aerodynamics.gazebo.xacro"/>
+  
+  <xacro:include filename="$(find hector_sensors_description)/urdf/generic_camera.urdf.xacro"/>
+
+  <xacro:quadrotor_sensors/>
+  <xacro:quadrotor_controller/>
+  <xacro:quadrotor_aerodynamics/>
+
+  <material name="black_color">
+    <color rgba="0.1 0.1 0.1 1.0"/>
+  </material>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.477"/>
+      <inertia ixx="0.011" iyy="0.011" izz="0.021" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+  </link>
+
+  <xacro:generic_camera name="bottom_cam" parent="base_link" ros_topic="camera/image" cam_info_topic="camera/camera_info" update_rate="30" res_x="640" res_y="480" image_format="R8G8B8" hfov="90">
+    <origin xyz="0.0 0.0 -0.3" rpy="0 ${M_PI/2} 0"/>
+  </xacro:generic_camera>
+
+  <joint name="base_to_drone_body" type="fixed">
+    <origin xyz="0 0 0" rpy="1.57079632679 0 0"/>
+    <parent link="base_link"/>
+    <child link="drone_body"/>
+  </joint>
+
+  <link name="drone_body">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://itu_s500_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="silver"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://itu_s500_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="DJ-2216-KV880_1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.05"/> 
+      <inertia ixx="0.00005" iyy="0.00005" izz="0.00005" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.009259 -0.006321 -0.159647" rpy="0 0 0"/>
+      <geometry><mesh filename="package://itu_s500_description/meshes/DJ-2216-KV880_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    </visual>
+  </link>
+  <joint name="prop_1" type="continuous">
+    <origin xyz="-0.009259 0.006321 0.159647" rpy="0 0 0"/><parent link="drone_body"/><child link="DJ-2216-KV880_1"/><axis xyz="0 1 0"/> 
+    <dynamics damping="0.002"/> 
+  </joint>
+  <link name="prop_1_visual_link">
+    <visual>
+      <origin xyz="0.009259 -0.042321 -0.159647" rpy="0 0 0"/>
+      <geometry><mesh filename="package://itu_s500_description/meshes/10x4.5L_v1_1.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="black_color"/>
+    </visual>
+  </link>
+  <joint name="prop_1_fixed" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/><parent link="DJ-2216-KV880_1"/><child link="prop_1_visual_link"/>
+  </joint>
+
+  <link name="DJ-2216-KV880__1__1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="0.00005" iyy="0.00005" izz="0.00005" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.266437 -0.027496 0.067234" rpy="0 0 0"/>
+      <geometry><mesh filename="package://itu_s500_description/meshes/DJ-2216-KV880__1__1.stl" scale="0.001 0.001 0.001"/></geometry>
+    </visual>
+  </link>
+  <joint name="prop_2" type="continuous">
+    <origin xyz="-0.266437 0.027496 -0.067234" rpy="0 0 0"/><parent link="drone_body"/><child link="DJ-2216-KV880__1__1"/><axis xyz="0 -1 0"/>
+    <dynamics damping="0.002"/> 
+  </joint>
+  <link name="prop_2_visual_link">
+    <visual>
+      <origin xyz="0.263116 -0.063223 0.064304" rpy="0 0 0"/>
+      <geometry><mesh filename="package://itu_s500_description/meshes/10x4.5L_v1__3__1.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="black_color"/>
+    </visual>
+  </link>
+  <joint name="prop_2_fixed" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/><parent link="DJ-2216-KV880__1__1"/><child link="prop_2_visual_link"/>
+  </joint>
+
+  <link name="DJ-2216-KV880__1___1__1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="0.00005" iyy="0.00005" izz="0.00005" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.038577 -0.048672 0.323546" rpy="0 0 0"/>
+      <geometry><mesh filename="package://itu_s500_description/meshes/DJ-2216-KV880__1___1__1.stl" scale="0.001 0.001 0.001"/></geometry>
+    </visual>
+  </link>
+  <joint name="prop_3" type="continuous">
+    <origin xyz="-0.038577 0.048672 -0.323546" rpy="0 0 0"/><parent link="drone_body"/><child link="DJ-2216-KV880__1___1__1"/><axis xyz="0 1 0"/>
+    <dynamics damping="0.002"/> 
+  </joint>
+  <link name="prop_3_visual_link">
+    <visual>
+      <origin xyz="0.038198 -0.084125 0.317306" rpy="0 0 0"/>
+      <geometry><mesh filename="package://itu_s500_description/meshes/10x4.5L_v1__2__1.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="black_color"/>
+    </visual>
+  </link>
+  <joint name="prop_3_fixed" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/><parent link="DJ-2216-KV880__1___1__1"/><child link="prop_3_visual_link"/>
+  </joint>
+
+  <link name="DJ-2216-KV880__1___1___1__1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="0.00005" iyy="0.00005" izz="0.00005" ixy="0.0" iyz="0.0" ixz="0.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.218601 -0.027496 0.096664" rpy="0 0 0"/>
+      <geometry><mesh filename="package://itu_s500_description/meshes/DJ-2216-KV880__1___1___1__1.stl" scale="0.001 0.001 0.001"/></geometry>
+    </visual>
+  </link>
+  <joint name="prop_4" type="continuous">
+    <origin xyz="0.218601 0.027496 -0.096664" rpy="0 0 0"/><parent link="drone_body"/><child link="DJ-2216-KV880__1___1___1__1"/><axis xyz="0 -1 0"/>
+    <dynamics damping="0.002"/> 
+  </joint>
+  <link name="prop_4_visual_link">
+    <visual>
+      <origin xyz="-0.215659 -0.063223 0.093354" rpy="0 0 0"/>
+      <geometry><mesh filename="package://itu_s500_description/meshes/10x4.5L_v1__1__1.stl" scale="0.001 0.001 0.001"/></geometry>
+      <material name="black_color"/>
+    </visual>
+  </link>
+  <joint name="prop_4_fixed" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/><parent link="DJ-2216-KV880__1___1___1__1"/><child link="prop_4_visual_link"/>
+  </joint>
+
+  <!-- Additional horizontal camera.
+  <joint name="camera1_joint" type="fixed">
+    <axis xyz="1 1 0"/>
+    <origin xyz="0 0.1 0.075" rpy="0 0 1.57"/>
+    <parent link="drone_body"/>
+    <child link="camera1"/>
+  </joint>
+
+  <gazebo reference="camera1">
+    <sensor type="camera" name="camera1_sensor">
+      <update_rate>30.0</update_rate>
+      <camera name="camera1">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin name="camera1_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>30.0</updateRate>
+        <cameraName>camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera1</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+  -->
+  <gazebo reference="drone_body">
+    <mu1>1.5</mu1> 
+    <mu2>1.5</mu2> 
+    <kp>1000000.0</kp> 
+    <kd>1.0</kd> 
+  </gazebo>
+
+</robot>

@@ -1,0 +1,21 @@
+# Mission settings
+takeoff_altitude: 2.5
+search_speed: 0.40
+search_stop_x: 7.0
+altitude_kp: 0.8
+max_vertical_speed: 0.7
+
+# Image-control settings
+pixel_kp: 0.0025
+max_horizontal_speed: 0.45
+center_tolerance_px: 28
+landing_speed: 0.22
+landing_height: 0.32
+
+# Detection settings
+red_min_area: 250
+aruco_id: 0
+
+# The bottom-camera axis mapping may be adjusted after a short test.
+pixel_y_to_body_x_sign: -1.0
+pixel_x_to_body_y_sign: -1.0

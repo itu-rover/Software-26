@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="paused" default="false"/>
+  <arg name="gui" default="true"/>
+  <arg name="run_mission" default="false"/>
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find drone_assignment)/models:$(optenv GAZEBO_MODEL_PATH)"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find drone_assignment)/worlds/drone_assignment.world"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+
+  <include file="$(find hector_quadrotor_gazebo)/launch/spawn_quadrotor.launch">
+    <arg name="model" value="$(find itu_s500_description)/urdf/s500.itu.urdf"/>
+    <arg name="x" value="0.0"/>
+    <arg name="y" value="0.0"/>
+    <arg name="z" value="0.3"/>
+    <arg name="controllers" value="controller/attitude controller/velocity controller/position"/>
+  </include>
+
+  <group ns="wrench_limits">
+    <param name="force/z/max" value="100.0"/>
+    <param name="torque/x/max" value="25.0"/>
+    <param name="torque/y/max" value="25.0"/>
+    <param name="torque/z/max" value="15.0"/>
+  </group>
+
+  <group ns="controller/velocity/z">
+    <param name="max" value="8.0"/>
+    <param name="p" value="15.0"/>
+    <param name="i" value="10.0"/>
+    <param name="i_clamp" value="30.0"/>
+  </group>
+
+  <group ns="controller/attitude/roll">
+    <param name="p" value="45.0"/>
+    <param name="i" value="5.0"/>
+    <param name="i_clamp" value="10.0"/>
+    <param name="d" value="4.32"/>
+  </group>
+
+  <group ns="controller/attitude/pitch">
+    <param name="p" value="45.0"/>
+    <param name="i" value="5.0"/>
+    <param name="i_clamp" value="10.0"/>
+    <param name="d" value="4.32"/>
+  </group>
+
+  <rosparam command="load" file="$(find drone_assignment)/config/mission.yaml"/>
+
+  <node if="$(arg run_mission)"
+        pkg="drone_assignment"
+        type="mission_template.py"
+        name="drone_assignment_mission"
+        output="screen"/>
+</launch>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <model name="aruco_pad">
+    <static>true</static>
+    <link name="pad_link">
+      <collision name="collision">
+        <pose>0 0 -0.01 0 0 0</pose>
+        <geometry><box><size>1.4 1.4 0.02</size></box></geometry>
+      </collision>
+      <visual name="marker_visual">
+        <geometry>
+          <plane>
+            <normal>0 0 1</normal>
+            <size>1.4 1.4</size>
+          </plane>
+        </geometry>
+        <material>
+          <script>
+            <uri>model://aruco_pad/materials/scripts</uri>
+            <uri>model://aruco_pad/materials/textures</uri>
+            <name>ArUco/Marker0</name>
+          </script>
+        </material>
+      </visual>
+    </link>
+  </model>
+</sdf>
