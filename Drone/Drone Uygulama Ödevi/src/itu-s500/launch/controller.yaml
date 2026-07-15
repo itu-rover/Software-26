@@ -1,0 +1,23 @@
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+
+prop_1_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: prop_1
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+
+prop_2_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: prop_2
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+
+prop_3_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: prop_3
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+
+prop_4_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: prop_4
+  pid: {p: 100.0, i: 0.01, d: 10.0}

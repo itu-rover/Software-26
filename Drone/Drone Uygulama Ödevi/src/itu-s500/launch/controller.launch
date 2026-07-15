@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <rosparam file="$(find itu_s500_description)/launch/controller.yaml" command="load"/>
+  <node name="controller_spawner" pkg="controller_manager" type="spawner"
+        respawn="false" output="screen"
+        args="prop_1_position_controller prop_2_position_controller prop_3_position_controller prop_4_position_controller joint_state_controller"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+        respawn="false" output="screen"/>
+</launch>
