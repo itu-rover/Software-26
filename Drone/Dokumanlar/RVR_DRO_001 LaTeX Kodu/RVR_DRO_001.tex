@@ -1,0 +1,1372 @@
+\documentclass[11pt,a4paper]{article}
+
+% =========================================================
+% RVR-DRO-001
+% İTÜ ROVER TAKIMI DRONE ALT EKİBİ
+% DOKÜMAN HAZIRLAMA VE YAYIN STANDARDI
+% =========================================================
+
+% ---------------------------------------------------------
+% PAKETLER
+% ---------------------------------------------------------
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[turkish]{babel}
+\usepackage{lmodern}
+
+\usepackage[
+    top=22mm,
+    bottom=22mm,
+    left=20mm,
+    right=20mm
+]{geometry}
+
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{float}
+
+% ---------------------------------------------------------
+% RENKLER
+% ---------------------------------------------------------
+
+\definecolor{RoverKoyu}{HTML}{1B1B1B}
+\definecolor{RoverGri}{HTML}{555555}
+\definecolor{RoverAcikGri}{HTML}{E8E8E8}
+\definecolor{RoverVurgu}{HTML}{B41F24}
+
+% ---------------------------------------------------------
+% PDF AYARLARI
+% ---------------------------------------------------------
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=RoverKoyu,
+    urlcolor=RoverVurgu,
+    pdftitle={RVR-DRO-001 Doküman Hazırlama ve Yayın Standardı},
+    pdfauthor={İTÜ Rover Takımı Drone Alt Ekibi}
+}
+
+% ---------------------------------------------------------
+% GENEL BİÇİM
+% ---------------------------------------------------------
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\renewcommand{\arraystretch}{1.3}
+
+% ---------------------------------------------------------
+% BAŞLIK BİÇİMLERİ
+% ---------------------------------------------------------
+
+\titleformat{\section}
+  {\Large\bfseries\color{RoverKoyu}}
+  {\thesection.}
+  {0.7em}
+  {}
+
+\titleformat{\subsection}
+  {\large\bfseries\color{RoverKoyu}}
+  {\thesubsection.}
+  {0.7em}
+  {}
+
+\titleformat{\subsubsection}
+  {\normalsize\bfseries\color{RoverGri}}
+  {\thesubsubsection.}
+  {0.7em}
+  {}
+
+% ---------------------------------------------------------
+% ŞEKİL VE TABLO
+% ---------------------------------------------------------
+
+\captionsetup{
+    font=small,
+    labelfont=bf
+}
+
+% ---------------------------------------------------------
+% KOD GÖSTERİMİ
+% ---------------------------------------------------------
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    frame=single,
+    breaklines=true,
+    columns=fullflexible,
+    showstringspaces=false
+}
+
+% =========================================================
+% BELGE BİLGİLERİ
+% =========================================================
+
+\newcommand{\BelgeNo}{RVR-DRO-001}
+\newcommand{\BelgeAdi}{DOKÜMAN HAZIRLAMA VE YAYIN STANDARDI}
+\newcommand{\Revizyon}{REV A}
+\newcommand{\YayinTarihi}{22 EYLÜL 2026}
+\newcommand{\BirimAdi}{İTÜ ROVER TAKIMI -- DRONE ALT EKİBİ}
+
+% =========================================================
+% ÜST BİLGİ / ALT BİLGİ
+% =========================================================
+
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[L]{
+    \begin{minipage}[c]{0.16\textwidth}
+        \includegraphics[height=11mm]{itu_rover_logo.png}
+    \end{minipage}
+}
+
+\fancyhead[C]{
+    \begin{minipage}[c]{0.55\textwidth}
+        \centering
+        \small\bfseries \BirimAdi
+    \end{minipage}
+}
+
+\fancyhead[R]{
+    \begin{minipage}[c]{0.20\textwidth}
+        \raggedleft
+        \small\bfseries
+        \BelgeNo\\
+        \Revizyon
+    \end{minipage}
+}
+
+\fancyfoot[L]{\scriptsize İTÜ ROVER TAKIMI}
+\fancyfoot[C]{\scriptsize \Revizyon\ -- \YayinTarihi}
+\fancyfoot[R]{\scriptsize SAYFA \thepage\ / \pageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0.8pt}
+\renewcommand{\footrulewidth}{0.6pt}
+
+\setlength{\headheight}{32pt}
+
+% =========================================================
+% ÖZEL KUTULAR
+% =========================================================
+
+\newtcolorbox{notkutusu}{
+    colback=white,
+    colframe=RoverGri,
+    boxrule=0.7pt,
+    arc=0mm,
+    title=\textbf{NOT}
+}
+
+\newtcolorbox{dikkatkutusu}{
+    colback=white,
+    colframe=RoverVurgu,
+    boxrule=1pt,
+    arc=0mm,
+    title=\textbf{DİKKAT}
+}
+
+\newtcolorbox{ornek}{
+    colback=RoverAcikGri,
+    colframe=RoverGri,
+    boxrule=0.5pt,
+    arc=0mm,
+    title=\textbf{ÖRNEK}
+}
+
+% =========================================================
+% BELGE
+% =========================================================
+
+\begin{document}
+
+% =========================================================
+% KAPAK
+% =========================================================
+
+\begin{titlepage}
+
+    \thispagestyle{empty}
+
+    \begin{center}
+
+        \vspace*{10mm}
+
+        \includegraphics[width=0.30\textwidth]{itu_rover_logo.png}
+
+        \vspace{14mm}
+
+        {\Large\bfseries İTÜ ROVER TAKIMI}
+
+        \vspace{3mm}
+
+        {\Large\bfseries DRONE ALT EKİBİ}
+
+        \vspace{20mm}
+
+        \rule{\textwidth}{1.2pt}
+
+        \vspace{8mm}
+
+        {\Huge\bfseries \BelgeAdi}
+
+        \vspace{8mm}
+
+        \rule{\textwidth}{1.2pt}
+
+        \vfill
+
+        \begin{tabular}{rl}
+
+            \textbf{BELGE NO:} &
+            \BelgeNo
+            \\[2mm]
+
+            \textbf{REVİZYON:} &
+            \Revizyon
+            \\[2mm]
+
+            \textbf{YAYIN TARİHİ:} &
+            \YayinTarihi
+            \\[2mm]
+
+            \textbf{BİRİM:} &
+            \BirimAdi
+
+        \end{tabular}
+
+        \vfill
+
+        {\small
+        Bu belge, İTÜ Rover Takımı Drone Alt Ekibi bünyesinde
+        oluşturulan teknik ve idari dokümanların hazırlanması,
+        numaralandırılması, yayımlanması ve revize edilmesine
+        ilişkin standartları tanımlar.
+        }
+
+        \vspace{14mm}
+
+    \end{center}
+
+\end{titlepage}
+
+% =========================================================
+% BELGE BİLGİLERİ
+% =========================================================
+
+\section*{BELGE BİLGİLERİ}
+
+\begin{tabularx}{\textwidth}{|>{\bfseries}p{45mm}|X|}
+\hline
+Belge No & \BelgeNo \\
+\hline
+Belge Adı & \BelgeAdi \\
+\hline
+Birim & \BirimAdi \\
+\hline
+Revizyon & \Revizyon \\
+\hline
+Yayın Tarihi & \YayinTarihi \\
+\hline
+Hazırlayan & Drone Alt Ekibi \\
+\hline
+Kontrol Eden & \\
+\hline
+Onaylayan & \\
+\hline
+\end{tabularx}
+
+\vspace{10mm}
+
+% =========================================================
+% REVİZYON GEÇMİŞİ
+% =========================================================
+
+\section*{REVİZYON GEÇMİŞİ}
+
+\begin{tabularx}{\textwidth}{|c|c|X|X|}
+\hline
+
+\textbf{REVİZYON} &
+\textbf{TARİH} &
+\textbf{AÇIKLAMA} &
+\textbf{HAZIRLAYAN}
+\\
+\hline
+
+A &
+22 EYLÜL 2026 &
+İlk yayın &
+Drone Alt Ekibi
+\\
+\hline
+
+&
+&
+&
+\\
+\hline
+
+&
+&
+&
+\\
+\hline
+
+\end{tabularx}
+
+\newpage
+
+% =========================================================
+% İÇİNDEKİLER
+% =========================================================
+
+\tableofcontents
+
+\newpage
+
+% =========================================================
+% 1. GİRİŞ
+% =========================================================
+
+\section{GİRİŞ}
+
+\subsection{Amaç}
+
+Bu standardın amacı, İTÜ Rover Takımı Drone Alt Ekibi tarafından
+hazırlanan tüm teknik ve idari dokümanların ortak bir yapıya sahip
+olmasını sağlamaktır.
+
+Dokümanların;
+
+\begin{itemize}
+    \item aynı takım kimliğini taşıması,
+    \item kolay tanımlanabilmesi,
+    \item sürümlerinin takip edilebilmesi,
+    \item farklı ekip üyeleri tarafından aynı yöntemle hazırlanabilmesi,
+    \item yıllar sonra dahi anlaşılabilir ve kullanılabilir olması,
+    \item teknik bilginin ekip içerisinde kalıcı hâle getirilmesi
+\end{itemize}
+
+amaçlanır.
+
+\subsection{Kapsam}
+
+Bu standart, İTÜ Rover Takımı Drone Alt Ekibi adına hazırlanan;
+
+\begin{itemize}
+    \item teknik manuelleri,
+    \item kullanım kılavuzlarını,
+    \item bakım dokümanlarını,
+    \item test prosedürlerini,
+    \item test raporlarını,
+    \item yazılım dokümantasyonlarını,
+    \item elektronik ve aviyonik dokümanlarını,
+    \item mekanik tasarım dokümanlarını,
+    \item uçuş prosedürlerini,
+    \item kontrol listelerini,
+    \item eğitim dokümanlarını,
+    \item mülakat ve değerlendirme dokümanlarını,
+    \item sistem tanım dokümanlarını
+\end{itemize}
+
+kapsar.
+
+\subsection{Uygulama}
+
+Yeni oluşturulacak tüm RVR-DRO serisi belgelerin bu standarda uygun
+hazırlanması esastır.
+
+Mevcut belgeler, gerekli görüldüğünde yeni revizyon yayımlanarak
+bu standarda uyarlanabilir.
+
+% =========================================================
+% 2. DOKÜMAN NUMARALANDIRMA SİSTEMİ
+% =========================================================
+
+\newpage
+
+\section{DOKÜMAN NUMARALANDIRMA SİSTEMİ}
+
+\subsection{Genel Yapı}
+
+Drone Alt Ekibi dokümanları aşağıdaki biçimde numaralandırılır:
+
+\begin{center}
+
+\Large
+\textbf{RVR-DRO-XXX}
+
+\end{center}
+
+Burada;
+
+\begin{center}
+
+\begin{tabularx}{0.85\textwidth}{|c|X|}
+\hline
+\textbf{Alan} & \textbf{Anlamı} \\
+\hline
+RVR & İTÜ Rover Takımı \\
+\hline
+DRO & Drone Alt Ekibi \\
+\hline
+XXX & Üç basamaklı benzersiz doküman numarası \\
+\hline
+\end{tabularx}
+
+\end{center}
+
+\subsection{Numara Tahsisi}
+
+Her dokümana yalnızca bir kez numara tahsis edilir.
+
+Tahsis edilen numara daha sonra farklı bir belge için kullanılamaz.
+
+Bir dokümanın adı veya kapsamı değişse dahi aynı doküman devam ediyorsa
+belge numarası korunur ve revizyon artırılır.
+
+\begin{dikkatkutusu}
+Silinen, yürürlükten kaldırılan veya artık kullanılmayan bir dokümanın
+numarası başka bir dokümana verilmez.
+\end{dikkatkutusu}
+
+\subsection{Temel Dokümanlar}
+
+Başlangıç dokümanları aşağıdaki şekilde tanımlanmıştır:
+
+\begin{center}
+
+\begin{tabularx}{0.95\textwidth}{|c|X|}
+\hline
+\textbf{Belge No} & \textbf{Belge Adı} \\
+\hline
+RVR-DRO-000 & Mülakat Soruları \\
+\hline
+RVR-DRO-001 & Doküman Hazırlama ve Yayın Standardı \\
+\hline
+\end{tabularx}
+
+\end{center}
+
+Yeni belgeler sırasıyla RVR-DRO-002,
+RVR-DRO-003 ve devam eden numaralarla yayımlanır.
+
+% =========================================================
+% 3. REVİZYON SİSTEMİ
+% =========================================================
+
+\newpage
+
+\section{REVİZYON SİSTEMİ}
+
+\subsection{Revizyon Gösterimi}
+
+Doküman revizyonları aşağıdaki biçimde gösterilir:
+
+\begin{center}
+
+\Large
+\textbf{REV A}
+\end{center}
+
+İlk yayımlanan sürüm \textbf{REV A} olarak tanımlanır.
+
+Daha sonraki sürümler alfabetik olarak ilerler:
+
+\begin{center}
+
+REV A $\rightarrow$ REV B $\rightarrow$ REV C $\rightarrow$ REV D
+
+\end{center}
+
+\subsection{Revizyon Gerektiren Değişiklikler}
+
+Aşağıdaki değişiklikler yeni bir revizyon gerektirir:
+
+\begin{itemize}
+    \item teknik bilgilerin değiştirilmesi,
+    \item prosedür değişiklikleri,
+    \item yeni bölüm eklenmesi,
+    \item bölüm kaldırılması,
+    \item sistem mimarisinin değişmesi,
+    \item kullanılan donanım veya yazılımın değişmesi,
+    \item kritik hata düzeltmeleri,
+    \item görev veya test yönteminin değiştirilmesi.
+\end{itemize}
+
+Yalnızca küçük yazım hatalarının düzeltilmesi veyahut tasarım değişikliği durumunda yeni revizyon
+gerekliliğine ekip lideri karar verir.
+
+\subsection{Revizyon Geçmişi}
+
+Her dokümanda revizyon geçmişi tablosu bulunmalıdır.
+
+Tabloda en az aşağıdaki bilgiler yer almalıdır:
+
+\begin{itemize}
+    \item revizyon kodu,
+    \item yayın tarihi,
+    \item yapılan değişikliğin kısa açıklaması,
+    \item hazırlayan kişi veya birim.
+\end{itemize}
+
+% =========================================================
+% 4. DOSYA ADLANDIRMA STANDARDI
+% =========================================================
+
+\newpage
+
+\section{DOSYA ADLANDIRMA STANDARDI}
+
+\subsection{Genel Biçim}
+
+Elektronik dosyaların adı aşağıdaki biçimde oluşturulur:
+
+\begin{center}
+
+\texttt{BELGENO\_REV-X\_BELGE-ADI.pdf}
+
+\end{center}
+
+Örnek:
+
+\begin{ornek}
+\texttt{RVR-DRO-001\_REV-A\_DOKUMAN-HAZIRLAMA-VE-YAYIN-STANDARDI.pdf}
+\end{ornek}
+
+Kaynak LaTeX dosyası:
+
+\begin{ornek}
+\texttt{RVR-DRO-001\_REV-A\_DOKUMAN-HAZIRLAMA-VE-YAYIN-STANDARDI.tex}
+\end{ornek}
+
+\subsection{Dosya Adlarında Kullanılacak Karakterler}
+
+Uyumluluk amacıyla dosya adlarında;
+
+\begin{itemize}
+    \item Türkçe karakter kullanılmaması,
+    \item boşluk yerine tire veya alt çizgi kullanılması,
+    \item belge numarasının dosya adının başında bulunması,
+    \item revizyon kodunun dosya adına eklenmesi
+\end{itemize}
+
+önerilir.
+
+% =========================================================
+% 5. BELGE YAPISI
+% =========================================================
+
+\newpage
+
+\section{BELGE YAPISI}
+
+\subsection{Zorunlu Bölümler}
+
+Standart bir RVR-DRO dokümanı mümkün olduğu ölçüde aşağıdaki sırayı
+izlemelidir:
+
+\begin{enumerate}
+    \item Kapak,
+    \item Belge Bilgileri,
+    \item Revizyon Geçmişi,
+    \item İçindekiler,
+    \item Giriş,
+    \item Ana Teknik İçerik,
+    \item Ekler,
+    \item Belge Sonu.
+\end{enumerate}
+
+Belgenin türüne göre bazı bölümler kullanılmayabilir.
+
+\subsection{Kapak}
+
+Kapakta en az aşağıdaki bilgiler bulunmalıdır:
+
+\begin{itemize}
+    \item İTÜ Rover logosu,
+    \item İTÜ Rover Takımı,
+    \item Drone Alt Ekibi,
+    \item belge adı,
+    \item belge numarası,
+    \item revizyon,
+    \item yayın tarihi,
+    \item birim adı.
+\end{itemize}
+
+\subsection{Belge Bilgileri}
+
+Belge bilgileri sayfasında en az;
+
+\begin{itemize}
+    \item belge numarası,
+    \item belge adı,
+    \item birim,
+    \item revizyon,
+    \item yayın tarihi,
+    \item hazırlayan,
+    \item kontrol eden,
+    \item onaylayan
+\end{itemize}
+
+alanları bulunmalıdır.
+
+\subsection{İçindekiler}
+
+Beş sayfadan uzun dokümanlarda içindekiler bölümü bulunması önerilir.
+
+Teknik manuellerde içindekiler bölümü zorunludur.
+
+% =========================================================
+% 6. SAYFA DÜZENİ
+% =========================================================
+
+\newpage
+
+\section{SAYFA DÜZENİ}
+
+\subsection{Kağıt Boyutu}
+
+Tüm standart dokümanlar A4 boyutunda hazırlanır.
+
+\subsection{Kenar Boşlukları}
+
+Standart kenar boşlukları:
+
+\begin{center}
+
+\begin{tabular}{|l|c|}
+\hline
+Üst & 22 mm \\
+\hline
+Alt & 22 mm \\
+\hline
+Sol & 20 mm \\
+\hline
+Sağ & 20 mm \\
+\hline
+\end{tabular}
+
+\end{center}
+
+\subsection{Üst Bilgi}
+
+Kapak hariç sayfaların üst bilgisinde;
+
+\begin{itemize}
+    \item sol tarafta İTÜ Rover logosu,
+    \item ortada İTÜ ROVER TAKIMI -- DRONE ALT EKİBİ,
+    \item sağ tarafta belge numarası ve revizyon
+\end{itemize}
+
+bulunur.
+
+\subsection{Alt Bilgi}
+
+Sayfa alt bilgisinde;
+
+\begin{itemize}
+    \item sol tarafta İTÜ ROVER TAKIMI,
+    \item ortada revizyon ve yayın tarihi,
+    \item sağ tarafta mevcut sayfa ve toplam sayfa sayısı
+\end{itemize}
+
+yer alır.
+
+Örnek:
+
+\begin{center}
+
+\texttt{İTÜ ROVER TAKIMI \hspace{10mm} REV A -- 22 EYLÜL 2026
+\hspace{10mm} SAYFA 12 / 36}
+
+\end{center}
+
+% =========================================================
+% 7. YAZIM VE DİL STANDARDI
+% =========================================================
+
+\newpage
+
+\section{YAZIM VE DİL STANDARDI}
+
+\subsection{Belge Dili}
+
+RVR-DRO serisi dokümanların ana dili Türkçedir.
+
+Teknik gereklilik olmadığı sürece İngilizce ve Türkçe ifadelerin
+aynı cümle içerisinde karışık kullanılmasından kaçınılmalıdır.
+
+
+
+\subsection{Teknik Terimler}
+
+Uluslararası kabul görmüş ve Türkçede yerleşik karşılığı bulunmayan
+teknik ifadeler özgün biçimleriyle kullanılabilir.
+
+Örnekler:
+
+\begin{itemize}
+    \item PID,
+    \item ESC,
+    \item GPS,
+    \item LiPo,
+    \item IMU,
+    \item UART,
+    \item SPI,
+    \item I2C,
+    \item MAVLink,
+    \item ArUco.
+\end{itemize}
+
+Bir kısaltma ilk kez kullanıldığında gerekli görülürse açıklaması
+verilmelidir.
+
+\subsection{Anlatım}
+
+Teknik metin;
+
+\begin{itemize}
+    \item açık,
+    \item kısa,
+    \item ölçülebilir,
+    \item yoruma mümkün olduğunca kapalı,
+    \item teknik olarak doğrulanabilir
+\end{itemize}
+
+olmalıdır.
+
+\begin{dikkatkutusu}
+``Yaklaşık iyi'', ``biraz yüksek'', ``fazla hızlı'' gibi ölçülemeyen
+ifadeler kritik teknik prosedürlerde kullanılmamalıdır.
+\end{dikkatkutusu}
+
+Bunun yerine mümkün olduğunda sayısal sınırlar verilmelidir.
+
+% =========================================================
+% 8. BAŞLIKLAR VE NUMARALANDIRMA
+% =========================================================
+
+\newpage
+
+\section{BAŞLIKLAR VE NUMARALANDIRMA}
+
+Ana bölümler sayısal olarak numaralandırılır:
+
+\begin{center}
+
+1. GİRİŞ
+
+2. SİSTEM TANIMI
+
+3. DONANIM
+
+4. YAZILIM
+
+\end{center}
+
+Alt başlıklar aşağıdaki şekilde devam eder:
+
+\begin{center}
+
+3.1. Uçuş Kontrolcüsü
+
+3.2. Güç Sistemi
+
+3.2.1. Batarya
+
+3.2.2. Güç Dağıtımı
+
+\end{center}
+
+Aşırı derin başlık yapısından kaçınılmalıdır.
+
+Mümkün olduğunca üç seviyeden daha fazla başlık kullanılmamalıdır.
+
+% =========================================================
+% 9. TABLOLAR
+% =========================================================
+
+\newpage
+
+\section{TABLOLAR}
+
+Her tablo;
+
+\begin{itemize}
+    \item anlaşılır bir başlığa,
+    \item gerekli birimlere,
+    \item açık sütun adlarına
+\end{itemize}
+
+sahip olmalıdır.
+
+Teknik değerler mümkün olduğunca tablo hâlinde sunulmalıdır.
+
+Örnek:
+
+\begin{table}[H]
+
+\centering
+
+\caption{Örnek sistem parametreleri}
+
+\begin{tabular}{|l|c|c|}
+\hline
+\textbf{Parametre} & \textbf{Değer} & \textbf{Birim} \\
+\hline
+Batarya gerilimi & 14.8 & V \\
+\hline
+Azami akım & 40 & A \\
+\hline
+Pervane çapı & 10 & inç \\
+\hline
+\end{tabular}
+
+\end{table}
+
+% =========================================================
+% 10. ŞEKİLLER VE GÖRSELLER
+% =========================================================
+
+\newpage
+
+\section{ŞEKİLLER VE GÖRSELLER}
+
+Şekiller;
+
+\begin{itemize}
+    \item yeterli çözünürlükte,
+    \item okunabilir,
+    \item belge içerisinde gerekli boyutta,
+    \item mümkünse beyaz veya şeffaf arka planlı
+\end{itemize}
+
+olmalıdır.
+
+Her teknik şeklin altında açıklayıcı başlık bulunmalıdır.
+
+Örnek:
+
+\begin{verbatim}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{drone_system.png}
+    \caption{Drone sistemi genel yerleşimi}
+\end{figure}
+\end{verbatim}
+
+Şekil üzerinde oklar,
+numaralar ve açıklamalar kullanılıyorsa
+metinler baskı veya PDF görüntüleme sırasında okunabilir olmalıdır.
+
+% =========================================================
+% 11. TEKNİK DEĞERLER VE BİRİMLER
+% =========================================================
+
+\newpage
+
+\section{TEKNİK DEĞERLER VE BİRİMLER}
+
+Teknik dokümanlarda mümkün olduğunca SI birim sistemi kullanılmalıdır.
+
+Örnek birimler:
+
+\begin{center}
+
+\begin{tabular}{|l|c|}
+\hline
+Uzunluk & mm, m \\
+\hline
+Kütle & g, kg \\
+\hline
+Gerilim & V \\
+\hline
+Akım & A \\
+\hline
+Güç & W \\
+\hline
+Sıcaklık & $^\circ$C \\
+\hline
+Frekans & Hz \\
+\hline
+Hız & m/s \\
+\hline
+\end{tabular}
+
+\end{center}
+
+Bir sayısal değer ilk defa verildiğinde birimi belirtilmelidir.
+
+Belirsiz veya ölçülmemiş değerler kesin değer gibi yazılmamalıdır.
+
+% =========================================================
+% 12. YAZILIM VE KOD BLOKLARI
+% =========================================================
+
+\newpage
+
+\section{YAZILIM VE KOD BLOKLARI}
+
+Kaynak kod,
+terminal komutu,
+yapılandırma dosyası
+ve benzeri içerikler normal metinden ayrı gösterilmelidir.
+
+Örnek:
+
+\begin{lstlisting}
+python3 main.py --live-low-alt
+\end{lstlisting}
+
+Terminal komutları mümkün olduğunca doğrudan kopyalanabilir biçimde
+verilmelidir.
+
+Bir komut belirli bir klasörde çalıştırılacaksa
+çalışma dizini ayrıca belirtilmelidir.
+
+Yapılandırma değerlerinde mümkün olduğunca;
+
+\begin{itemize}
+    \item parametre adı,
+    \item varsayılan değer,
+    \item kullanılan değer,
+    \item birim,
+    \item kısa açıklama
+\end{itemize}
+
+verilmelidir.
+
+% =========================================================
+% 13. NOT, DİKKAT VE UYARI KULLANIMI
+% =========================================================
+
+\newpage
+
+\section{NOT, DİKKAT VE UYARI KULLANIMI}
+
+Teknik bilgilerin önem seviyesini belirtmek için standart bilgi kutuları
+kullanılabilir.
+
+\subsection{Not}
+
+Ek açıklama,
+ipuçları
+veya doğrudan güvenlik riski oluşturmayan bilgiler için kullanılır.
+
+\begin{notkutusu}
+Bu işlem sırasında uçuş kontrolcüsünün bilgisayara USB üzerinden bağlı
+olması yeterlidir.
+\end{notkutusu}
+
+\subsection{Dikkat}
+
+Hatalı uygulanması durumunda ekipman hasarına,
+veri kaybına
+veya görevin başarısız olmasına yol açabilecek işlemlerde kullanılır.
+
+\begin{dikkatkutusu}
+Pervane yönleri doğrulanmadan uçuş testi yapılmamalıdır.
+\end{dikkatkutusu}
+
+\subsection{Emniyet Uyarıları}
+
+İnsan güvenliğini doğrudan ilgilendiren durumlarda uyarı açık,
+kısa ve belirsizliğe yer vermeyecek şekilde yazılmalıdır.
+
+% =========================================================
+% 14. PROSEDÜRLERİN YAZILMASI
+% =========================================================
+
+\newpage
+
+\section{PROSEDÜRLERİN YAZILMASI}
+
+Bir işlemin sıralı olarak gerçekleştirilmesi gerekiyorsa
+numaralandırılmış prosedür kullanılmalıdır.
+
+Örnek:
+
+\begin{enumerate}
+
+    \item Batarya bağlantısını kontrol et.
+
+    \item Pervanelerin doğru yönde takıldığını doğrula.
+
+    \item Uçuş kontrolcüsünü enerjilendir.
+
+    \item Yer kontrol istasyonu bağlantısını doğrula.
+
+    \item Sensör durumlarını kontrol et.
+
+    \item Uçuş alanının güvenli olduğunu doğrula.
+
+\end{enumerate}
+
+Her işlem maddesi mümkün olduğunca tek bir eylem içermelidir.
+
+Bir adımın başarılı olup olmadığının anlaşılması için gerekli durumlarda
+beklenen sonuç ayrıca yazılmalıdır.
+
+% =========================================================
+% 15. TEST DOKÜMANLARI
+% =========================================================
+
+\newpage
+
+\section{TEST DOKÜMANLARI}
+
+Test prosedürleri mümkün olduğunca aşağıdaki bilgileri içermelidir:
+
+\begin{itemize}
+    \item testin amacı,
+    \item kullanılan sistem veya prototip,
+    \item kullanılan donanımlar,
+    \item yazılım sürümü,
+    \item test ortamı,
+    \item ön koşullar,
+    \item test adımları,
+    \item ölçülecek değerler,
+    \item başarı kriterleri,
+    \item test sonucu,
+    \item gözlemler,
+    \item ilgili log veya veri dosyaları.
+\end{itemize}
+
+Test gerçekleştirilmeden önce başarı kriterleri belirlenmelidir.
+
+\begin{dikkatkutusu}
+Test tamamlandıktan sonra sonuca göre başarı kriteri değiştirilmemelidir.
+\end{dikkatkutusu}
+
+% =========================================================
+% 16. KAYNAK VE REFERANSLAR
+% =========================================================
+
+\newpage
+
+\section{KAYNAK VE REFERANSLAR}
+
+Başka bir RVR-DRO dokümanına atıf yapılırken belge numarası kullanılmalıdır.
+
+Örnek:
+
+\begin{ornek}
+Uçuş öncesi kontroller için RVR-DRO-XXX dokümanına bakınız.
+\end{ornek}
+
+Harici teknik dokümanlarda mümkünse;
+
+\begin{itemize}
+    \item doküman adı,
+    \item üretici veya yayımlayan kurum,
+    \item sürüm,
+    \item erişim tarihi
+\end{itemize}
+
+belirtilmelidir.
+
+Üretici veri sayfaları,
+resmî kullanım kılavuzları
+ve teknik standartlar mümkün olduğunca öncelikli kaynak olarak
+kullanılmalıdır.
+
+% =========================================================
+% 17. EKLER
+% =========================================================
+
+\newpage
+
+\section{EKLER}
+
+Ana belgenin akışını bozacak ölçüde uzun olan ancak belgeyle doğrudan
+ilişkili içerikler ek bölümünde verilebilir.
+
+Örnek ekler:
+
+\begin{itemize}
+    \item elektrik şemaları,
+    \item kablolama tabloları,
+    \item pin listeleri,
+    \item parametre tabloları,
+    \item parça listeleri,
+    \item yazılım yapılandırmaları,
+    \item uzun test sonuçları,
+    \item kontrol listeleri.
+\end{itemize}
+
+Ekler aşağıdaki biçimde adlandırılır:
+
+\begin{center}
+
+EK A -- KABLOLAMA ŞEMASI
+
+EK B -- PARAMETRE LİSTESİ
+
+EK C -- KONTROL LİSTESİ
+
+\end{center}
+
+% =========================================================
+% 18. DOKÜMAN HAZIRLAMA SÜRECİ
+% =========================================================
+
+\newpage
+
+\section{DOKÜMAN HAZIRLAMA SÜRECİ}
+
+Yeni bir doküman hazırlanırken aşağıdaki süreç uygulanır:
+
+\begin{enumerate}
+
+    \item Dokümana ihtiyaç olduğu belirlenir.
+
+    \item Kullanılmamış bir RVR-DRO numarası tahsis edilir.
+
+    \item Doküman adı belirlenir.
+
+    \item RVR-DRO standart LaTeX şablonu kullanılır.
+
+    \item Teknik içerik hazırlanır.
+
+    \item İçerik teknik olarak kontrol edilir.
+
+    \item Yazım ve biçim kontrolü yapılır.
+
+    \item Doküman PDF olarak oluşturulur.
+
+    \item Son PDF görsel olarak kontrol edilir.
+
+    \item Revizyon tablosu tamamlanır.
+
+    \item Doküman ilgili ekip depolama alanında yayımlanır.
+
+\end{enumerate}
+
+% =========================================================
+% 19. REVİZYON VE DEĞİŞİKLİK SÜRECİ
+% =========================================================
+
+\newpage
+
+\section{REVİZYON VE DEĞİŞİKLİK SÜRECİ}
+
+Yayımlanmış bir belge değiştirilecekse mevcut dosya doğrudan üzerine
+yazılmamalıdır.
+
+Yeni revizyon oluşturulur.
+
+Örneğin:
+
+\begin{center}
+
+RVR-DRO-005 REV A
+
+$\downarrow$
+
+RVR-DRO-005 REV B
+
+\end{center}
+
+Revizyon geçmişine yapılan değişiklik kısa ve anlaşılır şekilde yazılır.
+
+Örnek:
+
+\begin{center}
+
+\begin{tabularx}{0.95\textwidth}{|c|c|X|}
+\hline
+REV & TARİH & AÇIKLAMA \\
+\hline
+A & 22.09.2026 & İlk yayın \\
+\hline
+B & 04.10.2026 & Uçuş öncesi kontrol prosedürü güncellendi \\
+\hline
+C & 18.10.2026 & Haberleşme sistemi bölümü eklendi \\
+\hline
+\end{tabularx}
+
+\end{center}
+
+% =========================================================
+% 20. ARŞİVLEME
+% =========================================================
+
+\newpage
+
+\section{ARŞİVLEME}
+
+Yayımlanan dokümanların hem kaynak dosyası hem PDF çıktısı saklanmalıdır.
+
+Önerilen klasör yapısı:
+
+\begin{lstlisting}
+DOCUMENTATION/
+|
++-- RVR-DRO-000/
+|   +-- SOURCE/
+|   +-- RELEASE/
+|   +-- ARCHIVE/
+|
++-- RVR-DRO-001/
+|   +-- SOURCE/
+|   +-- RELEASE/
+|   +-- ARCHIVE/
+|
++-- RVR-DRO-002/
+    +-- SOURCE/
+    +-- RELEASE/
+    +-- ARCHIVE/
+\end{lstlisting}
+
+\texttt{SOURCE} klasörü düzenlenebilir kaynak dosyalarını,
+
+\texttt{RELEASE} klasörü güncel yayımlanmış PDF sürümünü,
+
+\texttt{ARCHIVE} klasörü eski revizyonları
+
+içerir.
+
+Eski revizyonlar silinmemelidir.
+
+% =========================================================
+% 21. DOKÜMAN KONTROL LİSTESİ
+% =========================================================
+
+\newpage
+
+\section{DOKÜMAN YAYIN KONTROL LİSTESİ}
+
+Bir doküman yayımlanmadan önce aşağıdaki kontroller yapılmalıdır.
+
+\begin{tabularx}{\textwidth}{|X|c|}
+\hline
+\textbf{Kontrol} & \textbf{Durum} \\
+\hline
+Belge numarası doğru mu? & $\square$ \\
+\hline
+Belge adı doğru mu? & $\square$ \\
+\hline
+Revizyon bilgisi doğru mu? & $\square$ \\
+\hline
+Yayın tarihi doğru mu? & $\square$ \\
+\hline
+İTÜ Rover logosu doğru mu? & $\square$ \\
+\hline
+Birim adı doğru mu? & $\square$ \\
+\hline
+Üst bilgi tüm sayfalarda doğru mu? & $\square$ \\
+\hline
+Alt bilgi tüm sayfalarda doğru mu? & $\square$ \\
+\hline
+Sayfa numaraları doğru mu? & $\square$ \\
+\hline
+İçindekiler güncel mi? & $\square$ \\
+\hline
+Revizyon geçmişi güncel mi? & $\square$ \\
+\hline
+Tablo ve şekiller okunabilir mi? & $\square$ \\
+\hline
+Teknik değerlerin birimleri mevcut mu? & $\square$ \\
+\hline
+Yazım hataları kontrol edildi mi? & $\square$ \\
+\hline
+Teknik bilgiler doğrulandı mı? & $\square$ \\
+\hline
+Dosya adı standarda uygun mu? & $\square$ \\
+\hline
+Kaynak dosya arşivlendi mi? & $\square$ \\
+\hline
+PDF son kez görsel olarak kontrol edildi mi? & $\square$ \\
+\hline
+\end{tabularx}
+
+% =========================================================
+% 22. STANDARTTAN SAPMALAR
+% =========================================================
+
+\newpage
+
+\section{STANDARTTAN SAPMALAR}
+
+Dokümanın kullanım amacı nedeniyle bu standardın bazı maddelerinin
+uygulanmasının uygun olmadığı durumlarda biçimsel değişiklik yapılabilir.
+
+Ancak aşağıdaki unsurlar mümkün olduğunca korunmalıdır:
+
+\begin{itemize}
+    \item RVR-DRO belge numarası,
+    \item revizyon kodu,
+    \item İTÜ Rover Takımı Drone Alt Ekibi tanımı,
+    \item kurumsal üst bilgi,
+    \item kurumsal alt bilgi,
+    \item revizyon geçmişi,
+    \item belge numarası ile dosya adının ilişkilendirilmesi.
+\end{itemize}
+
+Standarttan önemli ölçüde sapılan özel dokümanlarda gerekçe belge
+içerisinde belirtilmelidir.
+
+% =========================================================
+% 23. SON HÜKÜMLER
+% =========================================================
+
+\newpage
+
+\section{SON HÜKÜMLER}
+
+Bu standart, İTÜ Rover Takımı Drone Alt Ekibi bünyesinde oluşturulan
+RVR-DRO serisi dokümanlar için temel dokümantasyon referansıdır.
+
+Yeni dokümanlar hazırlanırken bu belge esas alınmalıdır.
+
+Dokümantasyon sisteminde yapılan yapısal değişiklikler öncelikle
+bu dokümana işlenmeli ve yeni revizyon yayımlanmalıdır.
+
+RVR-DRO serisinin biçimsel veya numaralandırma sistemini etkileyen
+değişiklikler bireysel belgelerde bağımsız olarak uygulanmamalıdır.
+
+% =========================================================
+% BELGE SONU
+% =========================================================
+
+\newpage
+
+\begin{center}
+
+\vspace*{\fill}
+
+{\Large\bfseries BELGE SONU}
+
+\vspace{5mm}
+
+{\bfseries \BelgeNo}
+
+\vspace{2mm}
+
+{\BelgeAdi}
+
+\vspace{6mm}
+
+{\small İTÜ Rover Takımı Drone Alt Ekibi}
+
+\vspace*{\fill}
+
+\end{center}
+
+\end{document}
